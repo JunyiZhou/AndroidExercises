@@ -7,9 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.junyizhou.recyclerviewdemo.R;
 import com.example.junyizhou.recyclerviewdemo.decoration.DividerItemDecoration;
+import com.example.junyizhou.recyclerviewdemo.foundation.IOnItemClickListener;
+import com.example.junyizhou.recyclerviewdemo.foundation.IOnItemLongClickListener;
 import com.example.junyizhou.recyclerviewdemo.foundation.RecyclerListFragment;
 
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ import java.util.List;
 /**
  * Created by JunyiZhou on 2016/1/4.
  */
-public class LinearListDemoFragment extends RecyclerListFragment {
+public class LinearListDemoFragment extends RecyclerListFragment implements IOnItemClickListener, IOnItemLongClickListener{
 
     private List<String> mDataList;
 
@@ -26,6 +29,8 @@ public class LinearListDemoFragment extends RecyclerListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
+        setOnItemClickListener(this);
+        setOnItemLongClickListener(this);
     }
 
     @Override
@@ -49,6 +54,16 @@ public class LinearListDemoFragment extends RecyclerListFragment {
     @Override
     public RecyclerView.ItemDecoration createItemDecoration() {
         return new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(getActivity(), "点击" + mDataList.get(position), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
+        Toast.makeText(getActivity(), "长按" + mDataList.get(position), Toast.LENGTH_SHORT).show();
     }
 
     class CharViewHolder extends ViewHolder<String> {

@@ -1,5 +1,6 @@
 package com.example.junyizhou.recyclerviewdemo.foundation;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,9 @@ public abstract class RecyclerListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerListAdapter mRecyclerAdapter;
+
+    private IOnItemClickListener mIOnItemClickListener;
+    private IOnItemLongClickListener mIOnItemLongClickListener;
 
     private List dataList = new ArrayList();
 
@@ -52,6 +56,14 @@ public abstract class RecyclerListFragment extends Fragment {
             mRecyclerAdapter = new RecyclerListAdapter();
             mRecyclerView.setAdapter(mRecyclerAdapter);
         }
+    }
+
+    public void setOnItemClickListener(IOnItemClickListener listener){
+        mIOnItemClickListener = listener;
+    }
+
+    public void setOnItemLongClickListener(IOnItemLongClickListener listener){
+        mIOnItemLongClickListener = listener;
     }
 
     public ViewHolder getViewHolder(ViewGroup parent, int type) {
@@ -122,7 +134,7 @@ public abstract class RecyclerListFragment extends Fragment {
         }
     }
 
-    public static abstract class ViewHolder<T> extends RecyclerView.ViewHolder {
+    public abstract class ViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         private final View mRootView;
 
@@ -135,8 +147,25 @@ public abstract class RecyclerListFragment extends Fragment {
             super(view);
             mRootView = view;
             mRootView.setTag(this);
+            mRootView.setOnClickListener(this);
+            mRootView.setOnLongClickListener(this);
         }
 
         public abstract void bind(T item, int position);
+
+        @Override
+        public void onClick(View v) {
+            if (mIOnItemClickListener != null) {
+                mIOnItemClickListener.onItemClick(v, getPosition());
+            }
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            if (mIOnItemLongClickListener != null) {
+                mIOnItemLongClickListener.onItemLongClick(v, getPosition());
+            }
+            return true;
+        }
     }
 }
