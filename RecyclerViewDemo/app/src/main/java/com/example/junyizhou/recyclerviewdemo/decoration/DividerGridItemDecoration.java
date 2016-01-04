@@ -1,4 +1,4 @@
-package com.example.junyizhou.recyclerviewdemo;
+package com.example.junyizhou.recyclerviewdemo.decoration;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -34,7 +34,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private int getSpanCount(RecyclerView parent) {
-        // ÁĞÊı
+        // åˆ—æ•°
         int spanCount = -1;
         LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
@@ -84,7 +84,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                                 int childCount) {
         LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            if ((pos + 1) % spanCount == 0)// Èç¹ûÊÇ×îºóÒ»ÁĞ£¬Ôò²»ĞèÒª»æÖÆÓÒ±ß
+            if ((pos + 1) % spanCount == 0)// å¦‚æœæ˜¯æœ€åä¸€åˆ—ï¼Œåˆ™ä¸éœ€è¦ç»˜åˆ¶å³è¾¹
             {
                 return true;
             }
@@ -92,13 +92,13 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
             int orientation = ((StaggeredGridLayoutManager) layoutManager)
                     .getOrientation();
             if (orientation == StaggeredGridLayoutManager.VERTICAL) {
-                if ((pos + 1) % spanCount == 0)// Èç¹ûÊÇ×îºóÒ»ÁĞ£¬Ôò²»ĞèÒª»æÖÆÓÒ±ß
+                if ((pos + 1) % spanCount == 0)// å¦‚æœæ˜¯æœ€åä¸€åˆ—ï¼Œåˆ™ä¸éœ€è¦ç»˜åˆ¶å³è¾¹
                 {
                     return true;
                 }
             } else {
                 childCount = childCount - childCount % spanCount;
-                if (pos >= childCount)// Èç¹ûÊÇ×îºóÒ»ÁĞ£¬Ôò²»ĞèÒª»æÖÆÓÒ±ß
+                if (pos >= childCount)// å¦‚æœæ˜¯æœ€åä¸€åˆ—ï¼Œåˆ™ä¸éœ€è¦ç»˜åˆ¶å³è¾¹
                     return true;
             }
         }
@@ -110,21 +110,21 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
         LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             childCount = childCount - childCount % spanCount;
-            if (pos >= childCount)// Èç¹ûÊÇ×îºóÒ»ĞĞ£¬Ôò²»ĞèÒª»æÖÆµ×²¿
+            if (pos >= childCount)// å¦‚æœæ˜¯æœ€åä¸€è¡Œï¼Œåˆ™ä¸éœ€è¦ç»˜åˆ¶åº•éƒ¨
                 return true;
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             int orientation = ((StaggeredGridLayoutManager) layoutManager)
                     .getOrientation();
-            // StaggeredGridLayoutManager ÇÒ×İÏò¹ö¶¯
+            // StaggeredGridLayoutManager ä¸”çºµå‘æ»šåŠ¨
             if (orientation == StaggeredGridLayoutManager.VERTICAL) {
                 childCount = childCount - childCount % spanCount;
-                // Èç¹ûÊÇ×îºóÒ»ĞĞ£¬Ôò²»ĞèÒª»æÖÆµ×²¿
+                // å¦‚æœæ˜¯æœ€åä¸€è¡Œï¼Œåˆ™ä¸éœ€è¦ç»˜åˆ¶åº•éƒ¨
                 if (pos >= childCount)
                     return true;
             } else
-            // StaggeredGridLayoutManager ÇÒºáÏò¹ö¶¯
+            // StaggeredGridLayoutManager ä¸”æ¨ªå‘æ»šåŠ¨
             {
-                // Èç¹ûÊÇ×îºóÒ»ĞĞ£¬Ôò²»ĞèÒª»æÖÆµ×²¿
+                // å¦‚æœæ˜¯æœ€åä¸€è¡Œï¼Œåˆ™ä¸éœ€è¦ç»˜åˆ¶åº•éƒ¨
                 if ((pos + 1) % spanCount == 0) {
                     return true;
                 }
@@ -138,10 +138,10 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
                                RecyclerView parent) {
         int spanCount = getSpanCount(parent);
         int childCount = parent.getAdapter().getItemCount();
-        if (isLastRaw(parent, itemPosition, spanCount, childCount))// Èç¹ûÊÇ×îºóÒ»ĞĞ£¬Ôò²»ĞèÒª»æÖÆµ×²¿
+        if (isLastRaw(parent, itemPosition, spanCount, childCount))// å¦‚æœæ˜¯æœ€åä¸€è¡Œï¼Œåˆ™ä¸éœ€è¦ç»˜åˆ¶åº•éƒ¨
         {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
-        } else if (isLastColum(parent, itemPosition, spanCount, childCount))// Èç¹ûÊÇ×îºóÒ»ÁĞ£¬Ôò²»ĞèÒª»æÖÆÓÒ±ß
+        } else if (isLastColum(parent, itemPosition, spanCount, childCount))// å¦‚æœæ˜¯æœ€åä¸€åˆ—ï¼Œåˆ™ä¸éœ€è¦ç»˜åˆ¶å³è¾¹
         {
             outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
         } else {

@@ -1,4 +1,4 @@
-package com.example.junyizhou.recyclerviewdemo;
+package com.example.junyizhou.recyclerviewdemo.decoration;
 
 import android.content.Context;
 import android.content.res.TypedArray;

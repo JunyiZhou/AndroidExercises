@@ -1,12 +1,41 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/id_recyclerview"
-        android:divider="#ffff0000"
-        android:dividerHeight="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btn_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="linear" />
+
+        <Button
+            android:id="@+id/btn_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="grid" />
+
+        <Button
+            android:id="@+id/btn_staggered_grid_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="staggered_grid_horizontal" />
+
+        <Button
+            android:id="@+id/btn_staggered_grid_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="staggered_grid_vertical" />
+
+        <Button
+            android:id="@+id/btn_staggered_grid_vertical_flow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="staggered_grid_vertical_flow" />
+    </LinearLayout>
+</FrameLayout>
