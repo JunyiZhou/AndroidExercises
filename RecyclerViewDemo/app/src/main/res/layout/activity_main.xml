@@ -21,6 +21,12 @@
             android:text="grid" />
 
         <Button
+            android:id="@+id/btn_grid_span_size_diy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="grid_span_size_diy" />
+
+        <Button
             android:id="@+id/btn_staggered_grid_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
