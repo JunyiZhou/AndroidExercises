@@ -72,6 +72,11 @@ public class StaggeredGridVerticalFlowListDemoFragment extends RecyclerListFragm
         return new DividerGridItemDecoration(getActivity());
     }
 
+    @Override
+    public RecyclerView.ItemAnimator createItemAnimator() {
+        return null;
+    }
+
     class CharFirstViewHolder extends ViewHolder<String> {
 
         TextView tvChar;

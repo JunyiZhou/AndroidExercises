@@ -14,6 +14,8 @@ import android.view.View;
 
 /**
  * Created by JunyiZhou on 2015/12/31.
+ *
+ * 网格式布局的分割线，待优化
  */
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};

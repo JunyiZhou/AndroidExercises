@@ -53,6 +53,11 @@ public class StaggeredGridHorizontalListDemoFragment extends RecyclerListFragmen
         return new DividerGridItemDecoration(getActivity());
     }
 
+    @Override
+    public RecyclerView.ItemAnimator createItemAnimator() {
+        return null;
+    }
+
     class CharViewHolder extends ViewHolder<String> {
 
         TextView tvChar;

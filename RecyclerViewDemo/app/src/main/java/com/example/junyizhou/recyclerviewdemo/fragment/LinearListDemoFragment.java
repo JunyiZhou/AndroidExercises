@@ -1,6 +1,7 @@
 package com.example.junyizhou.recyclerviewdemo.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,13 +58,23 @@ public class LinearListDemoFragment extends RecyclerListFragment implements IOnI
     }
 
     @Override
+    public RecyclerView.ItemAnimator createItemAnimator() {
+        DefaultItemAnimator mDefaultItemAnimator = new DefaultItemAnimator();
+        mDefaultItemAnimator.setAddDuration(1000);
+        mDefaultItemAnimator.setChangeDuration(1000);
+        mDefaultItemAnimator.setMoveDuration(1000);
+        mDefaultItemAnimator.setRemoveDuration(1000);
+        return mDefaultItemAnimator;
+    }
+
+    @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getActivity(), "点击" + mDataList.get(position), Toast.LENGTH_SHORT).show();
+        addData(position, "CYP");
     }
 
     @Override
     public void onItemLongClick(View view, int position) {
-        Toast.makeText(getActivity(), "长按" + mDataList.get(position), Toast.LENGTH_SHORT).show();
+        removeData(position);
     }
 
     class CharViewHolder extends ViewHolder<String> {
@@ -77,6 +88,15 @@ public class LinearListDemoFragment extends RecyclerListFragment implements IOnI
         public CharViewHolder(View view) {
             super(view);
             tvChar = (TextView) view.findViewById(R.id.tv_char);
+            tvChar.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            super.onClick(v);
+            if (v.getId() == R.id.tv_char) {
+                Toast.makeText(getActivity(), "我是" + mDataList.get(getPosition()), Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
