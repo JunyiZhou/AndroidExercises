@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnItemTouchListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import java.util.List;
 
 /**
  * Created by JunyiZhou on 2015/12/31.
- *
+ * <p/>
  * 带有RecyclerView的Fragment基类
  */
 public abstract class RecyclerListFragment extends Fragment {
@@ -27,6 +28,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
     private IOnItemClickListener mIOnItemClickListener;//item点击事件监听实例
     private IOnItemLongClickListener mIOnItemLongClickListener;//item长按事件监听实例
+    private OnItemTouchListener mOnItemTouchListener;//item触摸事件监听实例
 
     private List dataList = new ArrayList();//RecyclerView数据
 
@@ -69,25 +71,88 @@ public abstract class RecyclerListFragment extends Fragment {
     }
 
     /**
+     * 获取当前RecyclerView实例
+     *
+     * @return 当前RecyclerView实例
+     */
+    public RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
+
+    /**
+     * 获取当前RecyclerView的adapter
+     *
+     * @return 当前RecyclerView的adapter
+     */
+    public RecyclerListAdapter getAdapter() {
+        return mRecyclerAdapter;
+    }
+
+    /**
+     * 获取ViewHolder
+     * 抽象方法，当type数量为1的时候被调用，需要实现
+     *
+     * @param parent ViewHolder的父布局
+     * @return ViewHolder实例
+     */
+    public abstract ViewHolder getViewHolder(ViewGroup parent);
+
+    /**
+     * 创建RecyclerView的LayoutManager
+     * 抽象方法，子类必须实现，不可以返回null，否则会报错
+     *
+     * @return RecyclerView的LayoutManager实例
+     */
+    public abstract RecyclerView.LayoutManager createLayoutManager();
+
+    /**
+     * 创建RecyclerView的分割线
+     * 抽象方法，子类可以返回null
+     *
+     * @return RecyclerView的分割线实例
+     */
+    public abstract RecyclerView.ItemDecoration createItemDecoration();
+
+    /**
+     * 创建RecyclerView的动画
+     * 抽象方法，子类可以返回null
+     *
+     * @return RecyclerView的动画
+     */
+    public abstract RecyclerView.ItemAnimator createItemAnimator();
+
+    /**
      * 设置item点击事件监听
+     *
      * @param listener item点击事件监听
      */
-    public void setOnItemClickListener(IOnItemClickListener listener){
+    public void setOnItemClickListener(IOnItemClickListener listener) {
         mIOnItemClickListener = listener;
     }
 
     /**
      * 设置item长按事件监听
+     *
      * @param listener item长按事件监听
      */
-    public void setOnItemLongClickListener(IOnItemLongClickListener listener){
+    public void setOnItemLongClickListener(IOnItemLongClickListener listener) {
         mIOnItemLongClickListener = listener;
     }
 
     /**
+     * 设置item触摸事件监听
+     *
+     * @param listener item触摸事件监听
+     */
+    public void setOnItemTouchListener(OnItemTouchListener listener) {
+        mOnItemTouchListener = listener;
+    }
+
+    /**
      * 根据type，来获取对应的ViewHolder
+     *
      * @param parent ViewHolder所在的父布局
-     * @param type ViewHolder类型
+     * @param type   ViewHolder类型
      * @return ViewHolder实例
      */
     public ViewHolder getViewHolder(ViewGroup parent, int type) {
@@ -96,6 +161,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
     /**
      * 获取item类型数量
+     *
      * @return item类型数量
      */
     public int getItemViewTypeCount() {
@@ -104,6 +170,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
     /**
      * 根据position获取对应的type
+     *
      * @param position item在RecyclerView中的位置
      * @return type
      */
@@ -113,6 +180,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
     /**
      * 获取数据list
+     *
      * @return 数据list
      */
     public List getDataList() {
@@ -121,6 +189,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
     /**
      * 设置数据list
+     *
      * @param dataList 数据list
      */
     public void setDataList(List dataList) {
@@ -132,9 +201,10 @@ public abstract class RecyclerListFragment extends Fragment {
 
     /**
      * 添加数据
+     *
      * @param position 添加数据的位置
-     * @param data 数据
-     * @param <T> 数据类型
+     * @param data     数据
+     * @param <T>      数据类型
      */
     public <T> void addData(int position, T data) {
         if (mRecyclerAdapter == null || dataList == null || dataList.size() < position) {
@@ -147,6 +217,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
     /**
      * 删除数据
+     *
      * @param position 删除数据的位置
      */
     public void removeData(int position) {
@@ -157,52 +228,6 @@ public abstract class RecyclerListFragment extends Fragment {
         mRecyclerAdapter.notifyItemRemoved(position);
         mRecyclerAdapter.notifyItemRangeChanged(position, dataList.size());
     }
-
-    /**
-     * 获取当前RecyclerView的adapter
-     * @return 当前RecyclerView的adapter
-     */
-    public RecyclerListAdapter getAdapter() {
-        return mRecyclerAdapter;
-    }
-
-    /**
-     * 设置adapter
-     * @param recyclerListAdapter adapter实例
-     */
-    public void setAdapter(RecyclerListAdapter recyclerListAdapter) {
-        mRecyclerAdapter = recyclerListAdapter;
-        mRecyclerView.setAdapter(mRecyclerAdapter);
-    }
-
-    /**
-     * 获取ViewHolder
-     * 抽象方法，当type数量为1的时候被调用，需要实现
-     * @param parent ViewHolder的父布局
-     * @return ViewHolder实例
-     */
-    public abstract ViewHolder getViewHolder(ViewGroup parent);
-
-    /**
-     * 创建RecyclerView的LayoutManager
-     * 抽象方法，子类必须实现，不可以返回null，否则会报错
-     * @return RecyclerView的LayoutManager实例
-     */
-    public abstract RecyclerView.LayoutManager createLayoutManager();
-
-    /**
-     * 创建RecyclerView的分割线
-     * 抽象方法，子类可以返回null
-     * @return RecyclerView的分割线实例
-     */
-    public abstract RecyclerView.ItemDecoration createItemDecoration();
-
-    /**
-     * 创建RecyclerView的动画
-     * 抽象方法，子类可以返回null
-     * @return RecyclerView的动画
-     */
-    public abstract RecyclerView.ItemAnimator createItemAnimator();
 
     /**
      * RecyclerView适配器封装子类
@@ -238,6 +263,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
     /**
      * RecyclerView 对应的ViewHolder
+     *
      * @param <T> 数据泛型
      */
     public abstract class ViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -246,6 +272,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
         /**
          * 获取RootView
+         *
          * @param <VT> RootView的ViewHolder实例类型
          * @return RootView的ViewHolder实例
          */
@@ -264,7 +291,8 @@ public abstract class RecyclerListFragment extends Fragment {
 
         /**
          * 数据与view元素bind方法
-         * @param item 数据
+         *
+         * @param item     数据
          * @param position 位置
          */
         public abstract void bind(T item, int position);
