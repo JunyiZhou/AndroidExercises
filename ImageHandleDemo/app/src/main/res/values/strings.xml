@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">ImageHandleDemo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="dialog_title_choose_image_source">选择你的图片来源</string>
+    <string name="get_image_from_camera">相机</string>
+    <string name="get_image_from_gallery">相册</string>
+
+    <string-array name="dialog_item_choose_image_source">
+        <item>@string/get_image_from_camera</item>
+        <item>@string/get_image_from_gallery</item>
+    </string-array>
+
+    <string-array name="decal_bitmap_items">
+        <item>assets://decals/decal_awesome.png</item>
+        <item>assets://decals/decal_batman.png</item>
+        <item>assets://decals/decal_beastmode.png</item>
+        <item>assets://decals/decal_catwoman.png</item>
+        <item>assets://decals/decal_fallinlove.png</item>
+        <item>assets://decals/decal_ftmodu.png</item>
+        <item>assets://decals/decal_girlonfire.png</item>
+        <item>assets://decals/decal_itsfittime.png</item>
+        <item>assets://decals/decal_megabotfight.png</item>
+        <item>assets://decals/decal_megabotnormal.png</item>
+        <item>assets://decals/decal_moring.png</item>
+        <item>assets://decals/decal_push.png</item>
+        <item>assets://decals/decal_run.png</item>
+        <item>assets://decals/decal_runtoendless.png</item>
+        <item>assets://decals/decal_tobebatman.png</item>
+        <item>assets://decals/decal_vavenger.png</item>
+        <item>assets://decals/decal_beaddicted.png</item>
+        <item>assets://decals/decal_liftiron.png</item>
+        <item>assets://decals/decal_youneedfatloss.png</item>
+        <item>assets://decals/decal_beyourself.png</item>
+        <item>assets://decals/decal_healthyandnature.png</item>
+        <item>assets://decals/decal_dontwait.png</item>
+        <item>assets://decals/decal_eatingisabelief.png</item>
+        <item>assets://decals/decal_shout.png</item>
+        <item>assets://decals/decal_baymaxandjianjian.png</item>
+        <item>assets://decals/decal_soil.png</item>
+        <item>assets://decals/decal_takemefly.png</item>
+        <item>assets://decals/decal_warmupgroup.png</item>
+        <item>assets://decals/decal_stamp.png</item>
+        <item>assets://decals/decal_fight.png</item>
+        <item>assets://decals/decal_noface.png</item>
+        <item>assets://decals/decal_darkcuisine.png</item>
+        <item>assets://decals/decal_death.png</item>
+        <item>assets://decals/decal_shield.png</item>
+        <item>assets://decals/decal_loki.png</item>
+        <item>assets://decals/decal_onfire.png</item>
+        <item>assets://decals/decal_broccoli.png</item>
+        <item>assets://decals/decal_steak.png</item>
+        <item>assets://decals/decal_menzerna.png</item>
+        <item>assets://decals/decal_vsangel.png</item>
+        <item>assets://decals/decal_hulk.png</item>
+        <item>assets://decals/decal_captainamerica.png</item>
+        <item>assets://decals/decal_energycore.png</item>
+        <item>assets://decals/decal_energyring.png</item>
+        <item>assets://decals/decal_abdominalmuscles.png</item>
+        <item>assets://decals/decal_cute.png</item>
+        <item>assets://decals/decal_letsrock.png</item>
+        <item>assets://decals/decal_wolverine.png</item>
+        <item>assets://decals/decal_thorshammer.png</item>
+        <item>assets://decals/decal_ironman.png</item>
+    </string-array>
+
+    <string-array name="decal_des_items">
+        <item>Awesome</item>
+        <item>蝙蝠侠</item>
+        <item>Beast Mode</item>
+        <item>猫女</item>
+        <item>Fall In Love</item>
+        <item>FT魔都</item>
+        <item>Girl On Fire</item>
+        <item>It\'s FitTime</item>
+        <item>Megabot Fight</item>
+        <item>Megabot Normal</item>
+        <item>Moring</item>
+        <item>Push</item>
+        <item>Run</item>
+        <item>Run出无限</item>
+        <item>To Be Batman</item>
+        <item>V字复仇者</item>
+        <item>上瘾了</item>
+        <item>举铁</item>
+        <item>你该减脂了</item>
+        <item>做自己</item>
+        <item>健康自然</item>
+        <item>别等了</item>
+        <item>吃是一种信仰</item>
+        <item>呐喊</item>
+        <item>大白和健健</item>
+        <item>带土</item>
+        <item>带我飞</item>
+        <item>我的热身组</item>
+        <item>戳</item>
+        <item>斗志</item>
+        <item>无脸男</item>
+        <item>暗黑料理</item>
+        <item>死神</item>
+        <item>泛合金盾牌</item>
+        <item>Loki</item>
+        <item>火力全开</item>
+        <item>爆炸头西兰花</item>
+        <item>牛排太郎</item>
+        <item>猛男出没</item>
+        <item>维密天使</item>
+        <item>绿巨人</item>
+        <item>美国队长</item>
+        <item>能量核心</item>
+        <item>能量环</item>
+        <item>腹肌</item>
+        <item>萌</item>
+        <item>躁起来</item>
+        <item>金刚狼</item>
+        <item>雷神之锤</item>
+        <item>钢铁侠</item>
+    </string-array>
+</resources>

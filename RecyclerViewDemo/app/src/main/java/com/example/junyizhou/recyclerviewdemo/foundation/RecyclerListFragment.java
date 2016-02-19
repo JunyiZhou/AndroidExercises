@@ -18,19 +18,19 @@ import java.util.List;
 /**
  * Created by JunyiZhou on 2015/12/31.
  * <p/>
- * ´øÓĞRecyclerViewµÄFragment»ùÀà
+ * å¸¦æœ‰RecyclerViewçš„FragmentåŸºç±»
  */
 public abstract class RecyclerListFragment extends Fragment {
-    private static String ROOT_TAG = "ROOT_TAG";//ViewHolderÖĞrootViewµÄtag
+    private static String ROOT_TAG = "ROOT_TAG";//ViewHolderä¸­rootViewçš„tag
 
-    private RecyclerView mRecyclerView;//RecyclerViewÊµÀı
-    private RecyclerListAdapter mRecyclerAdapter;//RecyclerViewÊÊÅäÆ÷ÊµÀı
+    private RecyclerView mRecyclerView;//RecyclerViewå®ä¾‹
+    private RecyclerListAdapter mRecyclerAdapter;//RecyclerViewé€‚é…å™¨å®ä¾‹
 
-    private IOnItemClickListener mIOnItemClickListener;//itemµã»÷ÊÂ¼ş¼àÌıÊµÀı
-    private IOnItemLongClickListener mIOnItemLongClickListener;//item³¤°´ÊÂ¼ş¼àÌıÊµÀı
-    private OnItemTouchListener mOnItemTouchListener;//item´¥ÃşÊÂ¼ş¼àÌıÊµÀı
+    private IOnItemClickListener mIOnItemClickListener;//itemç‚¹å‡»äº‹ä»¶ç›‘å¬å®ä¾‹
+    private IOnItemLongClickListener mIOnItemLongClickListener;//itemé•¿æŒ‰äº‹ä»¶ç›‘å¬å®ä¾‹
+    private OnItemTouchListener mOnItemTouchListener;//itemè§¦æ‘¸äº‹ä»¶ç›‘å¬å®ä¾‹
 
-    private List dataList = new ArrayList();//RecyclerViewÊı¾İ
+    private List dataList = new ArrayList();//RecyclerViewæ•°æ®
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,128 +50,128 @@ public abstract class RecyclerListFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
 
         if (mRecyclerView != null) {
-            RecyclerView.LayoutManager lm = createLayoutManager();//RecyclerViewµÄLayoutManager£¬Ö÷ÒªÊÇ¿ØÖÆÏÔÊ¾µÄ²¼¾ÖÄ£Ê½£¬ÏßĞÔ¡¢Íø¸ñµÈ´ı
+            RecyclerView.LayoutManager lm = createLayoutManager();//RecyclerViewçš„LayoutManagerï¼Œä¸»è¦æ˜¯æ§åˆ¶æ˜¾ç¤ºçš„å¸ƒå±€æ¨¡å¼ï¼Œçº¿æ€§ã€ç½‘æ ¼ç­‰å¾…
             if (lm != null) {
                 mRecyclerView.setLayoutManager(lm);
             }
 
-            RecyclerView.ItemDecoration id = createItemDecoration();//RecyclerViewµÄ·Ö¸îÏß
+            RecyclerView.ItemDecoration id = createItemDecoration();//RecyclerViewçš„åˆ†å‰²çº¿
             if (id != null) {
                 mRecyclerView.addItemDecoration(id);
             }
 
-            RecyclerView.ItemAnimator ia = createItemAnimator();//RecyclerViewµÄ¶¯»­
+            RecyclerView.ItemAnimator ia = createItemAnimator();//RecyclerViewçš„åŠ¨ç”»
             if (ia != null) {
                 mRecyclerView.setItemAnimator(ia);
             }
 
             mRecyclerAdapter = new RecyclerListAdapter();
-            mRecyclerView.setAdapter(mRecyclerAdapter);//¼ÓÔØÊÊÅäÆ÷
+            mRecyclerView.setAdapter(mRecyclerAdapter);//åŠ è½½é€‚é…å™¨
         }
     }
 
     /**
-     * »ñÈ¡µ±Ç°RecyclerViewÊµÀı
+     * è·å–å½“å‰RecyclerViewå®ä¾‹
      *
-     * @return µ±Ç°RecyclerViewÊµÀı
+     * @return å½“å‰RecyclerViewå®ä¾‹
      */
     public RecyclerView getRecyclerView() {
         return mRecyclerView;
     }
 
     /**
-     * »ñÈ¡µ±Ç°RecyclerViewµÄadapter
+     * è·å–å½“å‰RecyclerViewçš„adapter
      *
-     * @return µ±Ç°RecyclerViewµÄadapter
+     * @return å½“å‰RecyclerViewçš„adapter
      */
     public RecyclerListAdapter getAdapter() {
         return mRecyclerAdapter;
     }
 
     /**
-     * »ñÈ¡ViewHolder
-     * ³éÏó·½·¨£¬µ±typeÊıÁ¿Îª1µÄÊ±ºò±»µ÷ÓÃ£¬ĞèÒªÊµÏÖ
+     * è·å–ViewHolder
+     * æŠ½è±¡æ–¹æ³•ï¼Œå½“typeæ•°é‡ä¸º1çš„æ—¶å€™è¢«è°ƒç”¨ï¼Œéœ€è¦å®ç°
      *
-     * @param parent ViewHolderµÄ¸¸²¼¾Ö
-     * @return ViewHolderÊµÀı
+     * @param parent ViewHolderçš„çˆ¶å¸ƒå±€
+     * @return ViewHolderå®ä¾‹
      */
     public abstract ViewHolder getViewHolder(ViewGroup parent);
 
     /**
-     * ´´½¨RecyclerViewµÄLayoutManager
-     * ³éÏó·½·¨£¬×ÓÀà±ØĞëÊµÏÖ£¬²»¿ÉÒÔ·µ»Ønull£¬·ñÔò»á±¨´í
+     * åˆ›å»ºRecyclerViewçš„LayoutManager
+     * æŠ½è±¡æ–¹æ³•ï¼Œå­ç±»å¿…é¡»å®ç°ï¼Œä¸å¯ä»¥è¿”å›nullï¼Œå¦åˆ™ä¼šæŠ¥é”™
      *
-     * @return RecyclerViewµÄLayoutManagerÊµÀı
+     * @return RecyclerViewçš„LayoutManagerå®ä¾‹
      */
     public abstract RecyclerView.LayoutManager createLayoutManager();
 
     /**
-     * ´´½¨RecyclerViewµÄ·Ö¸îÏß
-     * ³éÏó·½·¨£¬×ÓÀà¿ÉÒÔ·µ»Ønull
+     * åˆ›å»ºRecyclerViewçš„åˆ†å‰²çº¿
+     * æŠ½è±¡æ–¹æ³•ï¼Œå­ç±»å¯ä»¥è¿”å›null
      *
-     * @return RecyclerViewµÄ·Ö¸îÏßÊµÀı
+     * @return RecyclerViewçš„åˆ†å‰²çº¿å®ä¾‹
      */
     public abstract RecyclerView.ItemDecoration createItemDecoration();
 
     /**
-     * ´´½¨RecyclerViewµÄ¶¯»­
-     * ³éÏó·½·¨£¬×ÓÀà¿ÉÒÔ·µ»Ønull
+     * åˆ›å»ºRecyclerViewçš„åŠ¨ç”»
+     * æŠ½è±¡æ–¹æ³•ï¼Œå­ç±»å¯ä»¥è¿”å›null
      *
-     * @return RecyclerViewµÄ¶¯»­
+     * @return RecyclerViewçš„åŠ¨ç”»
      */
     public abstract RecyclerView.ItemAnimator createItemAnimator();
 
     /**
-     * ÉèÖÃitemµã»÷ÊÂ¼ş¼àÌı
+     * è®¾ç½®itemç‚¹å‡»äº‹ä»¶ç›‘å¬
      *
-     * @param listener itemµã»÷ÊÂ¼ş¼àÌı
+     * @param listener itemç‚¹å‡»äº‹ä»¶ç›‘å¬
      */
     public void setOnItemClickListener(IOnItemClickListener listener) {
         mIOnItemClickListener = listener;
     }
 
     /**
-     * ÉèÖÃitem³¤°´ÊÂ¼ş¼àÌı
+     * è®¾ç½®itemé•¿æŒ‰äº‹ä»¶ç›‘å¬
      *
-     * @param listener item³¤°´ÊÂ¼ş¼àÌı
+     * @param listener itemé•¿æŒ‰äº‹ä»¶ç›‘å¬
      */
     public void setOnItemLongClickListener(IOnItemLongClickListener listener) {
         mIOnItemLongClickListener = listener;
     }
 
     /**
-     * ÉèÖÃitem´¥ÃşÊÂ¼ş¼àÌı
+     * è®¾ç½®itemè§¦æ‘¸äº‹ä»¶ç›‘å¬
      *
-     * @param listener item´¥ÃşÊÂ¼ş¼àÌı
+     * @param listener itemè§¦æ‘¸äº‹ä»¶ç›‘å¬
      */
     public void setOnItemTouchListener(OnItemTouchListener listener) {
         mOnItemTouchListener = listener;
     }
 
     /**
-     * ¸ù¾İtype£¬À´»ñÈ¡¶ÔÓ¦µÄViewHolder
+     * æ ¹æ®typeï¼Œæ¥è·å–å¯¹åº”çš„ViewHolder
      *
-     * @param parent ViewHolderËùÔÚµÄ¸¸²¼¾Ö
-     * @param type   ViewHolderÀàĞÍ
-     * @return ViewHolderÊµÀı
+     * @param parent ViewHolderæ‰€åœ¨çš„çˆ¶å¸ƒå±€
+     * @param type   ViewHolderç±»å‹
+     * @return ViewHolderå®ä¾‹
      */
     public ViewHolder getViewHolder(ViewGroup parent, int type) {
         return null;
     }
 
     /**
-     * »ñÈ¡itemÀàĞÍÊıÁ¿
+     * è·å–itemç±»å‹æ•°é‡
      *
-     * @return itemÀàĞÍÊıÁ¿
+     * @return itemç±»å‹æ•°é‡
      */
     public int getItemViewTypeCount() {
         return 1;
     }
 
     /**
-     * ¸ù¾İposition»ñÈ¡¶ÔÓ¦µÄtype
+     * æ ¹æ®positionè·å–å¯¹åº”çš„type
      *
-     * @param position itemÔÚRecyclerViewÖĞµÄÎ»ÖÃ
+     * @param position itemåœ¨RecyclerViewä¸­çš„ä½ç½®
      * @return type
      */
     public int getItemViewTypeInPosition(int position) {
@@ -179,18 +179,18 @@ public abstract class RecyclerListFragment extends Fragment {
     }
 
     /**
-     * »ñÈ¡Êı¾İlist
+     * è·å–æ•°æ®list
      *
-     * @return Êı¾İlist
+     * @return æ•°æ®list
      */
     public List getDataList() {
         return dataList;
     }
 
     /**
-     * ÉèÖÃÊı¾İlist
+     * è®¾ç½®æ•°æ®list
      *
-     * @param dataList Êı¾İlist
+     * @param dataList æ•°æ®list
      */
     public void setDataList(List dataList) {
         if (dataList == null) {
@@ -200,11 +200,11 @@ public abstract class RecyclerListFragment extends Fragment {
     }
 
     /**
-     * Ìí¼ÓÊı¾İ
+     * æ·»åŠ æ•°æ®
      *
-     * @param position Ìí¼ÓÊı¾İµÄÎ»ÖÃ
-     * @param data     Êı¾İ
-     * @param <T>      Êı¾İÀàĞÍ
+     * @param position æ·»åŠ æ•°æ®çš„ä½ç½®
+     * @param data     æ•°æ®
+     * @param <T>      æ•°æ®ç±»å‹
      */
     public <T> void addData(int position, T data) {
         if (mRecyclerAdapter == null || dataList == null || dataList.size() < position) {
@@ -216,9 +216,9 @@ public abstract class RecyclerListFragment extends Fragment {
     }
 
     /**
-     * É¾³ıÊı¾İ
+     * åˆ é™¤æ•°æ®
      *
-     * @param position É¾³ıÊı¾İµÄÎ»ÖÃ
+     * @param position åˆ é™¤æ•°æ®çš„ä½ç½®
      */
     public void removeData(int position) {
         if (mRecyclerAdapter == null || dataList == null || dataList.size() < position) {
@@ -230,17 +230,17 @@ public abstract class RecyclerListFragment extends Fragment {
     }
 
     /**
-     * RecyclerViewÊÊÅäÆ÷·â×°×ÓÀà
+     * RecyclerViewé€‚é…å™¨å°è£…å­ç±»
      */
     public class RecyclerListAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            int count = getItemViewTypeCount();//item typeÊıÁ¿
+            int count = getItemViewTypeCount();//item typeæ•°é‡
 
-            if (count == 1) {//Èç¹ûitem typeÊıÁ¿Îª1£¬Ôòµ÷ÓÃ²»ĞèÒªÇø·ÖtypeµÄgetViewHolder·½·¨
+            if (count == 1) {//å¦‚æœitem typeæ•°é‡ä¸º1ï¼Œåˆ™è°ƒç”¨ä¸éœ€è¦åŒºåˆ†typeçš„getViewHolderæ–¹æ³•
                 return getViewHolder(parent);
-            } else {//Èç¹ûitem typeÊıÁ¿²»Îª1£¬Ôòµ÷ÓÃĞèÒªÇø·ÖtypeµÄgetViewHolder·½·¨
+            } else {//å¦‚æœitem typeæ•°é‡ä¸ä¸º1ï¼Œåˆ™è°ƒç”¨éœ€è¦åŒºåˆ†typeçš„getViewHolderæ–¹æ³•
                 return getViewHolder(parent, viewType);
             }
         }
@@ -257,24 +257,24 @@ public abstract class RecyclerListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int position) {
-            viewHolder.bind(getDataList().get(position), position);//½«¶ÔÓ¦positionµÄÊı¾İºÍposition´«¸øViewHolderÖĞµÄbind·½·¨£¬ÔÚbind·½·¨ÖĞ´¦ÀíÊı¾İµÄÌî×°
+            viewHolder.bind(getDataList().get(position), position);//å°†å¯¹åº”positionçš„æ•°æ®å’Œpositionä¼ ç»™ViewHolderä¸­çš„bindæ–¹æ³•ï¼Œåœ¨bindæ–¹æ³•ä¸­å¤„ç†æ•°æ®çš„å¡«è£…
         }
     }
 
     /**
-     * RecyclerView ¶ÔÓ¦µÄViewHolder
+     * RecyclerView å¯¹åº”çš„ViewHolder
      *
-     * @param <T> Êı¾İ·ºĞÍ
+     * @param <T> æ•°æ®æ³›å‹
      */
     public abstract class ViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         private final View mRootView;
 
         /**
-         * »ñÈ¡RootView
+         * è·å–RootView
          *
-         * @param <VT> RootViewµÄViewHolderÊµÀıÀàĞÍ
-         * @return RootViewµÄViewHolderÊµÀı
+         * @param <VT> RootViewçš„ViewHolderå®ä¾‹ç±»å‹
+         * @return RootViewçš„ViewHolderå®ä¾‹
          */
         @SuppressWarnings("unchecked")
         public <VT extends View> VT getRootView() {
@@ -290,16 +290,16 @@ public abstract class RecyclerListFragment extends Fragment {
         }
 
         /**
-         * Êı¾İÓëviewÔªËØbind·½·¨
+         * æ•°æ®ä¸viewå…ƒç´ bindæ–¹æ³•
          *
-         * @param item     Êı¾İ
-         * @param position Î»ÖÃ
+         * @param item     æ•°æ®
+         * @param position ä½ç½®
          */
         public abstract void bind(T item, int position);
 
         @Override
         public void onClick(View v) {
-            //itemµã»÷ÊÂ¼ş¼àÌıÉèÖÃ£¬Í¨¹ıRootViewµÄtag½øĞĞÇø·Ö
+            //itemç‚¹å‡»äº‹ä»¶ç›‘å¬è®¾ç½®ï¼Œé€šè¿‡RootViewçš„tagè¿›è¡ŒåŒºåˆ†
             if (mIOnItemClickListener != null && v.getTag() != null && v.getTag().equals(ROOT_TAG)) {
                 mIOnItemClickListener.onItemClick(v, getPosition());
             }
@@ -307,7 +307,7 @@ public abstract class RecyclerListFragment extends Fragment {
 
         @Override
         public boolean onLongClick(View v) {
-            //item³¤°´ÊÂ¼ş¼àÌıÉèÖÃ£¬Í¨¹ıRootViewµÄtag½øĞĞÇø·Ö
+            //itemé•¿æŒ‰äº‹ä»¶ç›‘å¬è®¾ç½®ï¼Œé€šè¿‡RootViewçš„tagè¿›è¡ŒåŒºåˆ†
             if (mIOnItemLongClickListener != null && v.getTag() != null && v.getTag().equals(ROOT_TAG)) {
                 mIOnItemLongClickListener.onItemLongClick(v, getPosition());
             }

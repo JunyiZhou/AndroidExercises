@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aspect="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/deep_grey"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <com.doctoror.aspectratiolayout.AspectRatioLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        aspect:aspect="1"
+        aspect:aspectType="vertical">
+
+        <com.example.junyizhou.imagehandledemo.view.CropView
+            android:id="@+id/main_crop_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+
+    </com.doctoror.aspectratiolayout.AspectRatioLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/tv_main_crop"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/main_func_text_color"
+            android:gravity="center"
+            android:text="裁剪" />
+
+        <TextView
+            android:id="@+id/tv_main_decal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/main_func_text_color"
+            android:gravity="center"
+            android:text="贴纸" />
+
+        <TextView
+            android:id="@+id/tv_main_filter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/main_func_text_color"
+            android:gravity="center"
+            android:text="滤镜" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/decal_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
