@@ -118,4 +118,5 @@
         <item>雷神之锤</item>
         <item>钢铁侠</item>
     </string-array>
+    <string name="title_activity_page">PageActivity</string>
 </resources>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">RxJavaDemo</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- 天气Banner-->
+    <string name="banner_weather_max_min_temperature">%1$s°/%2$s°</string>
+    <string name="banner_weather_wind_level">%1$s级</string>
+    <string name="banner_weather_air_quality_great">优</string>
+    <string name="banner_weather_air_quality_nice">良</string>
+    <string name="banner_weather_air_quality_light">轻度</string>
+    <string name="banner_weather_air_quality_middle">中度</string>
+    <string name="banner_weather_air_quality_heavy">重度</string>
+</resources>

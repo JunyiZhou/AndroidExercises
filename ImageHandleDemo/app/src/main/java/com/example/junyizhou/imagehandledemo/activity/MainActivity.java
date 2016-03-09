@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.junyizhou.imagehandledemo.R;
 import com.example.junyizhou.imagehandledemo.view.CropView;
+import com.example.junyizhou.imagehandledemo.view.DecalView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mFuncCrop, mFuncDecal, mFuncFilter;
 
     private CropView mCropView;
+    private DecalView mDecalView;
+
     private Toolbar toolbar;
 
     private RecyclerView mRecyclerView;
@@ -50,12 +53,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFuncDecal.setOnClickListener(this);
         mFuncFilter = (TextView) findViewById(R.id.tv_main_filter);
         mFuncFilter.setOnClickListener(this);
+        mFuncFilter.setVisibility(View.GONE);
         mFuncCrop.setSelected(true);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mCropView = (CropView) findViewById(R.id.main_crop_view);
+        mDecalView = (DecalView) findViewById(R.id.main_decal_view);
 
         initRecyclerView();
     }
@@ -185,7 +190,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onClick(View v) {
-
+            ImageLoader.getInstance().loadImage(decalList[getPosition()], new SimpleImageLoadingListener() {
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    // Do whatever you want with Bitmap
+                    mDecalView.addDecal(loadedImage);
+                }
+            });
         }
 
     }
