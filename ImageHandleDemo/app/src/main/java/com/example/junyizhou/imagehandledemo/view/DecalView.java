@@ -19,11 +19,11 @@ public class DecalView extends BaseView {
 
     private final Paint mPaintForLineAndCircle;
 
-    private int checkResultForMove = 0, checkResultForScaleAndRotate = 0, checkResultForDelete = 0;
+    private int moveTag = 0, transformTag = 0, deleteTag = 0;
 
     private Bitmap deleteIcon;
 
-    protected List<ImageGroup> imageGroupList = new ArrayList<>();
+    private List<ImageGroup> mDecalImageGroupList = new ArrayList<>();
 
     public DecalView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -38,7 +38,7 @@ public class DecalView extends BaseView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        for (ImageGroup imageGroup : imageGroupList) {
+        for (ImageGroup imageGroup : mDecalImageGroupList) {
             float[] points = getBitmapPoints(imageGroup);
             float x1 = points[0];
             float y1 = points[1];
@@ -65,52 +65,52 @@ public class DecalView extends BaseView {
             case MotionEvent.ACTION_DOWN:
                 anchorX = event.getX();
                 anchorY = event.getY();
-                checkResultForMove = decalCheck(anchorX, anchorY);
-                checkResultForDelete = deleteCheck(anchorX, anchorY);
-                if (checkResultForMove != -1 && checkResultForDelete == -1) {
-                    savedMatrix.set(imageGroupList.get(checkResultForMove).matrix);
+                moveTag = decalCheck(anchorX, anchorY);
+                deleteTag = deleteCheck(anchorX, anchorY);
+                if (moveTag != -1 && deleteTag == -1) {
+                    downMatrix.set(mDecalImageGroupList.get(moveTag).matrix);
                     mode = DRAG;
                 }
                 break;
 
             case MotionEvent.ACTION_POINTER_DOWN:
-                checkResultForMove = decalCheck(event.getX(0), event.getY(0));
-                checkResultForScaleAndRotate = decalCheck(event.getX(1), event.getY(1));
-                if (checkResultForMove != -1 && checkResultForScaleAndRotate == checkResultForMove && checkResultForDelete == -1) {
-                    savedMatrix.set(imageGroupList.get(checkResultForMove).matrix);
+                moveTag = decalCheck(event.getX(0), event.getY(0));
+                transformTag = decalCheck(event.getX(1), event.getY(1));
+                if (moveTag != -1 && transformTag == moveTag && deleteTag == -1) {
+                    downMatrix.set(mDecalImageGroupList.get(moveTag).matrix);
                     mode = ZOOM;
                 }
-                oldDist = spacing(event);
-                oldRotation = rotation(event);
+                oldDistance = getDistance(event);
+                oldRotation = getRotation(event);
 
                 midPoint = midPoint(event);
                 break;
 
             case MotionEvent.ACTION_MOVE:
                 if (mode == ZOOM) {
-                    tempMatrix.set(savedMatrix);
-                    float rotation = rotation(event) - oldRotation;
-                    float newDist = spacing(event);
-                    float scale = newDist / oldDist;
-                    tempMatrix.postScale(scale, scale, midPoint.x, midPoint.y);// 縮放
-                    tempMatrix.postRotate(rotation, midPoint.x, midPoint.y);// 旋轉
-                    if (checkResultForMove != -1) {
-                        imageGroupList.get(checkResultForMove).matrix.set(tempMatrix);
+                    moveMatrix.set(downMatrix);
+                    float newRotation = getRotation(event) - oldRotation;
+                    float newDistance = getDistance(event);
+                    float scale = newDistance / oldDistance;
+                    moveMatrix.postScale(scale, scale, midPoint.x, midPoint.y);// 縮放
+                    moveMatrix.postRotate(newRotation, midPoint.x, midPoint.y);// 旋轉
+                    if (moveTag != -1) {
+                        mDecalImageGroupList.get(moveTag).matrix.set(moveMatrix);
                     }
                     invalidate();
                 } else if (mode == DRAG) {
-                    tempMatrix.set(savedMatrix);
-                    tempMatrix.postTranslate(event.getX() - anchorX, event.getY() - anchorY);// 平移
-                    if (checkResultForMove != -1) {
-                        imageGroupList.get(checkResultForMove).matrix.set(tempMatrix);
+                    moveMatrix.set(downMatrix);
+                    moveMatrix.postTranslate(event.getX() - anchorX, event.getY() - anchorY);// 平移
+                    if (moveTag != -1) {
+                        mDecalImageGroupList.get(moveTag).matrix.set(moveMatrix);
                     }
                     invalidate();
                 }
                 break;
 
             case MotionEvent.ACTION_UP:
-                if (checkResultForDelete != -1) {
-                    imageGroupList.remove(checkResultForDelete).release();
+                if (deleteTag != -1) {
+                    mDecalImageGroupList.remove(deleteTag).release();
                     invalidate();
                 }
                 mode = NONE;
@@ -158,8 +158,8 @@ public class DecalView extends BaseView {
     }
 
     private int deleteCheck(float x, float y) {
-        for (int i = 0; i < imageGroupList.size(); i++) {
-            if (circleCheck(imageGroupList.get(i), x, y)) {
+        for (int i = 0; i < mDecalImageGroupList.size(); i++) {
+            if (circleCheck(mDecalImageGroupList.get(i), x, y)) {
                 return i;
             }
         }
@@ -167,8 +167,8 @@ public class DecalView extends BaseView {
     }
 
     private int decalCheck(float x, float y) {
-        for (int i = 0; i < imageGroupList.size(); i++) {
-            if (pointCheck(imageGroupList.get(i), x, y)) {
+        for (int i = 0; i < mDecalImageGroupList.size(); i++) {
+            if (pointCheck(mDecalImageGroupList.get(i), x, y)) {
                 return i;
             }
         }
@@ -185,7 +185,7 @@ public class DecalView extends BaseView {
         float transY = (getHeight() - imageGroupTemp.bitmap.getHeight()) / 2;
         imageGroupTemp.matrix.postTranslate(transX, transY);
         imageGroupTemp.matrix.postScale(0.5f, 0.5f, getWidth() / 2, getHeight() / 2);
-        imageGroupList.add(imageGroupTemp);
+        mDecalImageGroupList.add(imageGroupTemp);
 
         invalidate();
     }

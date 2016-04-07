@@ -32,13 +32,13 @@ public abstract class BaseView extends View {
 
     protected float anchorX = 0;
     protected float anchorY = 0;
-    protected float oldDist = 1f;
+    protected float oldDistance = 1f;
     protected float oldRotation = 0;
 
     protected PointF midPoint = new PointF();
 
-    protected Matrix tempMatrix = new Matrix();
-    protected Matrix savedMatrix = new Matrix();
+    protected Matrix moveMatrix = new Matrix();
+    protected Matrix downMatrix = new Matrix();
     protected Matrix matrixBig = new Matrix();
     protected Matrix matrixSmall = new Matrix();
 
@@ -77,7 +77,7 @@ public abstract class BaseView extends View {
     }
 
     // 触碰两点间距
-    public float spacing(MotionEvent event) {
+    public float getDistance(MotionEvent event) {
         float x = event.getX(0) - event.getX(1);
         float y = event.getY(0) - event.getY(1);
         return (float) Math.sqrt(x * x + y * y);
@@ -94,7 +94,7 @@ public abstract class BaseView extends View {
     }
 
     // 取旋转角
-    public float rotation(MotionEvent event) {
+    public float getRotation(MotionEvent event) {
         double delta_x = (event.getX(0) - event.getX(1));
         double delta_y = (event.getY(0) - event.getY(1));
         double radians = Math.atan2(delta_y, delta_x);
