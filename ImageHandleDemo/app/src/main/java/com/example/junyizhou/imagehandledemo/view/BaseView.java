@@ -80,7 +80,7 @@ public abstract class BaseView extends View {
     public float getDistance(MotionEvent event) {
         float x = event.getX(0) - event.getX(1);
         float y = event.getY(0) - event.getY(1);
-        return (float) Math.sqrt(x * x + y * y);
+        return (float) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
 
     // 取手势中心点
@@ -95,9 +95,9 @@ public abstract class BaseView extends View {
 
     // 取旋转角
     public float getRotation(MotionEvent event) {
-        double delta_x = (event.getX(0) - event.getX(1));
-        double delta_y = (event.getY(0) - event.getY(1));
-        double radians = Math.atan2(delta_y, delta_x);
+        double x = event.getX(0) - event.getX(1);
+        double y = event.getY(0) - event.getY(1);
+        double radians = Math.atan2(y, x);
         return (float) Math.toDegrees(radians);
     }
 
