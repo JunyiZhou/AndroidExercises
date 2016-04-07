@@ -10,11 +10,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.junyizhou.rxjavademo.R;
 import com.example.junyizhou.rxjavademo.api.ApiManager;
 import com.example.junyizhou.rxjavademo.databinding.ContentWeatherBinding;
 import com.example.junyizhou.rxjavademo.imageloader.RxImageLoader;
+import com.example.junyizhou.rxjavademo.model.User;
 import com.example.junyizhou.rxjavademo.model.WeatherData;
 
 import java.io.ByteArrayOutputStream;
@@ -43,10 +45,32 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApiManager.apiManager.getWeather("北京")
+//                ApiManager.apiManager.getWeather("北京")
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new Subscriber<WeatherData>() {
+//                            @Override
+//                            public void onCompleted() {
+//                                System.out.println("done");
+//                            }
+//
+//                            @Override
+//                            public void onError(Throwable e) {
+//                                System.out.println(e);
+//                            }
+//
+//                            @Override
+//                            public void onNext(WeatherData weatherData) {
+//                                System.out.println(weatherData);
+//                                binding.setWeather(weatherData);
+//                                RxImageLoader.getLoaderObservable(binding.ivWeatherBannerStatusIcon, weatherData.getData().getImgurl()).subscribe();
+//                            }
+//                        });
+
+                ApiManager.apiManager.getUser()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<WeatherData>() {
+                        .subscribe(new Subscriber<User>() {
                             @Override
                             public void onCompleted() {
                                 System.out.println("done");
@@ -58,14 +82,11 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onNext(WeatherData weatherData) {
-                                System.out.println(weatherData);
-                                binding.setWeather(weatherData);
-                                RxImageLoader.getLoaderObservable(binding.ivWeatherBannerStatusIcon, weatherData.getData().getImgurl()).subscribe();
+                            public void onNext(User user) {
+                                System.out.println(user);
+                                Toast.makeText(MainActivity.this, "name:" + user.getName() + ",age:" + user.getAge(), Toast.LENGTH_SHORT).show();
                             }
                         });
-
-
             }
         });
     }

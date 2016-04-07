@@ -124,14 +124,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mFuncFilter.setSelected(false);
                 mFuncCrop.setSelected(true);
                 mRecyclerView.setVisibility(View.GONE);
+                mDecalView.setVisibility(View.GONE);
                 break;
+
             case R.id.tv_main_decal:
                 mFuncCrop.setSelected(false);
                 mFuncDecal.setSelected(false);
                 mFuncFilter.setSelected(false);
                 mFuncDecal.setSelected(true);
                 mRecyclerView.setVisibility(View.VISIBLE);
+                mDecalView.setVisibility(View.VISIBLE);
                 break;
+
             case R.id.tv_main_filter:
                 mFuncCrop.setSelected(false);
                 mFuncDecal.setSelected(false);
@@ -139,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mFuncFilter.setSelected(true);
                 mRecyclerView.setVisibility(View.GONE);
                 break;
+
             default:
                 mFuncCrop.setSelected(false);
                 mFuncDecal.setSelected(false);

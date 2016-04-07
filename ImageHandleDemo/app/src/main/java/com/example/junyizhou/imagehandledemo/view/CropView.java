@@ -1,12 +1,6 @@
 package com.example.junyizhou.imagehandledemo.view;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -17,45 +11,45 @@ public class CropView extends BaseView {
     }
 
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+        switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                x_down = event.getX();
-                y_down = event.getY();
-                savedMatrix.set(mMatrixBitmap.matrix);
+                anchorX = event.getX();
+                anchorY = event.getY();
+                savedMatrix.set(mCropImageGroup.matrix);
                 mode = DRAG;
                 break;
+
             case MotionEvent.ACTION_POINTER_DOWN:
-                savedMatrix.set(mMatrixBitmap.matrix);
+                savedMatrix.set(mCropImageGroup.matrix);
                 mode = ZOOM;
                 oldDist = spacing(event);
-                midPoint(mid, event);
+                midPoint = midPoint(event);
                 break;
-            case MotionEvent.ACTION_MOVE:
 
+            case MotionEvent.ACTION_MOVE:
                 if (mode == ZOOM) {
                     tempMatrix.set(savedMatrix);
                     float newDist = spacing(event);
                     float scale = newDist / oldDist;
-                    tempMatrix.postScale(scale, scale, mid.x, mid.y);// 縮放
-
-                    mMatrixBitmap.matrix.set(tempMatrix);
+                    tempMatrix.postScale(scale, scale, midPoint.x, midPoint.y);// 縮放
+                    mCropImageGroup.matrix.set(tempMatrix);
                     invalidate();
 
                 } else if (mode == DRAG) {
                     tempMatrix.set(savedMatrix);
-                    tempMatrix.postTranslate(event.getX() - x_down, event.getY()
-                            - y_down);// 平移
-
-                    mMatrixBitmap.matrix.set(tempMatrix);
+                    tempMatrix.postTranslate(event.getX() - anchorX, event.getY() - anchorY);// 平移
+                    mCropImageGroup.matrix.set(tempMatrix);
                     invalidate();
                 }
                 break;
+
             case MotionEvent.ACTION_UP:
-                if(mMatrixBitmap.bitmap != null) {
+                if (mCropImageGroup.bitmap != null) {
                     matrixFix();
                 }
                 mode = NONE;
                 break;
+
             case MotionEvent.ACTION_POINTER_UP:
                 mode = NONE;
                 break;
@@ -63,48 +57,50 @@ public class CropView extends BaseView {
         return true;
     }
 
-    private void matrixFix(){
-        float[] f = new float[9];
-        tempMatrix.getValues(f);
+    private void matrixFix() {
+        float[] points = getBitmapPoints(mCropImageGroup.bitmap, tempMatrix);
+        float x1 = points[0];
+        float y1 = points[1];
+        float x2 = points[2];
+        float y3 = points[5];
 
-        float x1 = f[0] * 0 + f[1] * 0 + f[2];
-        float y1 = f[3] * 0 + f[4] * 0 + f[5];
-        float x2 = f[0] * mMatrixBitmap.bitmap.getWidth() + f[1] * 0 + f[2];
-        float y3 = f[3] * 0 + f[4] * mMatrixBitmap.bitmap.getHeight() + f[5];
-
-        if(mMatrixBitmap.bitmap.getWidth() <= mMatrixBitmap.bitmap.getHeight()){
-            if((int)(f[0]*mMatrixBitmap.bitmap.getWidth()) < getWidth()) {
+        if (mCropImageGroup.bitmap.getWidth() <= mCropImageGroup.bitmap.getHeight()) {
+            if ((x2 - x1) < getWidth()) {
                 tempMatrix.set(matrixBig);
             }
-            if((int)(f[4]*mMatrixBitmap.bitmap.getHeight()) < getHeight()){
+
+            if ((y3 - y1) < getHeight()) {
                 tempMatrix.set(matrixSmall);
             }
-        }else if(mMatrixBitmap.bitmap.getWidth() > mMatrixBitmap.bitmap.getHeight()){
-            if((int)(f[4]*mMatrixBitmap.bitmap.getHeight()) < getHeight()) {
+        } else if (mCropImageGroup.bitmap.getWidth() > mCropImageGroup.bitmap.getHeight()) {
+            if ((y3 - y1) < getHeight()) {
                 tempMatrix.set(matrixBig);
             }
-            if((int)(f[0]*mMatrixBitmap.bitmap.getWidth()) < getWidth()){
+
+            if ((x2 - x1) < getWidth()) {
                 tempMatrix.set(matrixSmall);
             }
         }
 
-        if(!tempMatrix.equals(matrixBig) && !tempMatrix.equals(matrixSmall)) {
-            if ((int) x1 >= mTargetRect.left) {
-                tempMatrix.postTranslate(mTargetRect.left-x1, 0);
+        if (!tempMatrix.equals(matrixBig) && !tempMatrix.equals(matrixSmall)) {
+            if (x1 >= targetRect.left) {
+                tempMatrix.postTranslate(targetRect.left - x1, 0);
             }
-            if ((int) x2 <= mTargetRect.left + getWidth()) {
+
+            if (x2 <= targetRect.left + getWidth()) {
                 tempMatrix.postTranslate(getWidth() - x2, 0);
             }
 
-            if ((int) y1 >= mTargetRect.top) {
-                tempMatrix.postTranslate(0, mTargetRect.top-y1);
+            if (y1 >= targetRect.top) {
+                tempMatrix.postTranslate(0, targetRect.top - y1);
             }
-            if ((int) y3 <= mTargetRect.top + getHeight()) {
-                tempMatrix.postTranslate(0, mTargetRect.top + getHeight()-y3);
+
+            if (y3 <= targetRect.top + getHeight()) {
+                tempMatrix.postTranslate(0, targetRect.top + getHeight() - y3);
             }
         }
 
-        mMatrixBitmap.matrix.set(tempMatrix);
+        mCropImageGroup.matrix.set(tempMatrix);
         invalidate();
     }
 }

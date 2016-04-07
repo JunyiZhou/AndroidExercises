@@ -25,7 +25,8 @@
         <com.example.junyizhou.imagehandledemo.view.DecalView
             android:id="@+id/main_decal_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
     </com.doctoror.aspectratiolayout.AspectRatioLayout>
 

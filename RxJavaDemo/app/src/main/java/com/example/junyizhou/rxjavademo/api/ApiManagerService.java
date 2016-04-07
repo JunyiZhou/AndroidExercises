@@ -2,6 +2,7 @@ package com.example.junyizhou.rxjavademo.api;
 
 import android.graphics.Bitmap;
 
+import com.example.junyizhou.rxjavademo.model.User;
 import com.example.junyizhou.rxjavademo.model.WeatherData;
 
 import retrofit.Call;
@@ -24,4 +25,7 @@ public interface ApiManagerService {
 
     @GET
     Observable<Bitmap> getBitmap(@Url String imageUrl);
+
+    @GET("api/getUser")
+    Observable<User> getUser();
 }

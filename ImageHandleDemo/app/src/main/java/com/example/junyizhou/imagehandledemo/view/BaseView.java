@@ -1,5 +1,6 @@
 package com.example.junyizhou.imagehandledemo.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -7,7 +8,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,40 +16,39 @@ import android.view.View;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
-public class BaseView extends View {
+public abstract class BaseView extends View {
 
     public interface OnSizeChangeListener {
         void onSizeChanged(int w, int h, int oldw, int oldh);
     }
 
-    public static final int NONE = 0;
-    public static final int DRAG = 1;
-    public static final int ZOOM = 2;
+    protected static final int NONE = 0;
+    protected static final int DRAG = 1;
+    protected static final int ZOOM = 2;
 
     protected int mode = NONE;
 
-    protected float x_down = 0;
-    protected float y_down = 0;
+    protected float anchorX = 0;
+    protected float anchorY = 0;
     protected float oldDist = 1f;
     protected float oldRotation = 0;
 
-    protected PointF mid = new PointF();
+    protected PointF midPoint = new PointF();
 
     protected Matrix tempMatrix = new Matrix();
     protected Matrix savedMatrix = new Matrix();
     protected Matrix matrixBig = new Matrix();
     protected Matrix matrixSmall = new Matrix();
 
-    protected Rect mTargetRect;
+    protected RectF targetRect;
 
     protected boolean isFirst = true;
 
     protected OnSizeChangeListener mOnSizeChangedListener = null;
 
-    protected MatrixBitmap mMatrixBitmap = new MatrixBitmap();
+    protected ImageGroup mCropImageGroup = new ImageGroup();
 
     protected final Paint mPaintForBitmap;
 
@@ -60,18 +60,19 @@ public class BaseView extends View {
         mPaintForBitmap.setFilterBitmap(true);
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         if (changed) {
-            mTargetRect = new Rect(left, top, right, bottom);
+            targetRect = new RectF(left, top, right, bottom);
         }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (mMatrixBitmap.bitmap != null) {
-            canvas.drawBitmap(mMatrixBitmap.bitmap, mMatrixBitmap.matrix, mPaintForBitmap);
+        if (mCropImageGroup.bitmap != null) {
+            canvas.drawBitmap(mCropImageGroup.bitmap, mCropImageGroup.matrix, mPaintForBitmap);
         }
     }
 
@@ -79,14 +80,17 @@ public class BaseView extends View {
     public float spacing(MotionEvent event) {
         float x = event.getX(0) - event.getX(1);
         float y = event.getY(0) - event.getY(1);
-        return (float)Math.sqrt(x * x + y * y);
+        return (float) Math.sqrt(x * x + y * y);
     }
 
     // 取手势中心点
-    public void midPoint(PointF point, MotionEvent event) {
+    public PointF midPoint(MotionEvent event) {
+        PointF point = new PointF();
         float x = event.getX(0) + event.getX(1);
         float y = event.getY(0) + event.getY(1);
         point.set(x / 2, y / 2);
+
+        return point;
     }
 
     // 取旋转角
@@ -97,25 +101,24 @@ public class BaseView extends View {
         return (float) Math.toDegrees(radians);
     }
 
-    public void CreatNewPhoto(String filePath, List<MatrixBitmap> matrixBitmapList) {
+    public void CreatNewPhoto(String filePath, List<ImageGroup> imageGroupList) {
         Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(),
                 Bitmap.Config.ARGB_8888); // 背景图片
         Canvas canvas = new Canvas(bitmap); // 新建画布
         canvas.drawColor(Color.WHITE);
 
-        if (mMatrixBitmap.bitmap != null && mMatrixBitmap.matrix != null) {
-            canvas.drawBitmap(mMatrixBitmap.bitmap, mMatrixBitmap.matrix, mPaintForBitmap);
+        if (mCropImageGroup.bitmap != null && mCropImageGroup.matrix != null) {
+            canvas.drawBitmap(mCropImageGroup.bitmap, mCropImageGroup.matrix, mPaintForBitmap);
         }
 
-        for (MatrixBitmap matrixBitmap : matrixBitmapList) {
-            canvas.drawBitmap(matrixBitmap.bitmap, matrixBitmap.matrix, mPaintForBitmap);
+        for (ImageGroup imageGroup : imageGroupList) {
+            canvas.drawBitmap(imageGroup.bitmap, imageGroup.matrix, mPaintForBitmap);
         }
 
         canvas.save(Canvas.ALL_SAVE_FLAG); // 保存画布
         canvas.restore();
 
-        Bitmap resultBitmap = Bitmap.createBitmap(bitmap, mTargetRect.left, mTargetRect.top, getWidth(), getWidth(),
-                null, false);
+        Bitmap resultBitmap = Bitmap.createBitmap(bitmap, (int) targetRect.left, (int) targetRect.top, getWidth(), getWidth(), null, false);
         bitmap.recycle();
 
         File f = new File(filePath);
@@ -137,7 +140,7 @@ public class BaseView extends View {
         }
     }
 
-    protected void onSizeChanged(int w, int h, int oldw, int oldh){
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         if (mOnSizeChangedListener != null) {
             mOnSizeChangedListener.onSizeChanged(w, h, oldw, oldh);
@@ -145,63 +148,83 @@ public class BaseView extends View {
         setBackgroundBitmap();
     }
 
-    public void setBackgroundBitmap(){
-        if(mMatrixBitmap.bitmap != null){
-            setBackgroundBitmap(mMatrixBitmap.bitmap);
+    public void setBackgroundBitmap() {
+        if (mCropImageGroup.bitmap != null) {
+            setBackgroundBitmap(mCropImageGroup.bitmap);
         }
     }
 
     public void setBackgroundBitmap(Bitmap bitmap) {
-        mMatrixBitmap.bitmap = bitmap;
-        if (mMatrixBitmap.matrix == null) {
-            mMatrixBitmap.matrix = new Matrix();
+        mCropImageGroup.bitmap = bitmap;
+        if (mCropImageGroup.matrix == null) {
+            mCropImageGroup.matrix = new Matrix();
         }
-        mMatrixBitmap.matrix.reset();
+        mCropImageGroup.matrix.reset();
 
-        if(matrixBig != null && matrixSmall != null){
+        if (matrixBig != null && matrixSmall != null) {
             matrixBig.reset();
             matrixSmall.reset();
         }
 
         float scale;
-        float transY = (getHeight() - mMatrixBitmap.bitmap.getHeight()) / 2;
-        float transX = (getWidth() - mMatrixBitmap.bitmap.getWidth()) / 2;
+        float transY = (getHeight() - mCropImageGroup.bitmap.getHeight()) / 2;
+        float transX = (getWidth() - mCropImageGroup.bitmap.getWidth()) / 2;
 
         matrixBig.postTranslate(transX, transY);
-        if (mMatrixBitmap.bitmap.getHeight() <= mMatrixBitmap.bitmap.getWidth()) {
-            scale = (float) getHeight() / mMatrixBitmap.bitmap.getHeight();
+        if (mCropImageGroup.bitmap.getHeight() <= mCropImageGroup.bitmap.getWidth()) {
+            scale = (float) getHeight() / mCropImageGroup.bitmap.getHeight();
         } else {
-            scale = (float) getWidth() / mMatrixBitmap.bitmap.getWidth();
+            scale = (float) getWidth() / mCropImageGroup.bitmap.getWidth();
         }
         matrixBig.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
 
         matrixSmall.postTranslate(transX, transY);
-        if (mMatrixBitmap.bitmap.getHeight() >= mMatrixBitmap.bitmap.getWidth()) {
-            scale = (float) getWidth() / mMatrixBitmap.bitmap.getHeight();
+        if (mCropImageGroup.bitmap.getHeight() >= mCropImageGroup.bitmap.getWidth()) {
+            scale = (float) getWidth() / mCropImageGroup.bitmap.getHeight();
         } else {
-            scale = (float) getWidth() / mMatrixBitmap.bitmap.getWidth();
+            scale = (float) getWidth() / mCropImageGroup.bitmap.getWidth();
         }
         matrixSmall.postScale(scale, scale, getWidth() / 2, getHeight() / 2);
 
-        mMatrixBitmap.matrix.set(matrixBig);
+        mCropImageGroup.matrix.set(matrixBig);
 
         invalidate();
+    }
+
+    protected float[] getBitmapPoints(ImageGroup imageGroup) {
+        return getBitmapPoints(imageGroup.bitmap, imageGroup.matrix);
+    }
+
+    protected float[] getBitmapPoints(Bitmap bitmap, Matrix matrix) {
+        float[] dst = new float[8];
+        float[] src = new float[]{
+                0, 0,
+                bitmap.getWidth(), 0,
+                0, bitmap.getHeight(),
+                bitmap.getWidth(), bitmap.getHeight()
+        };
+
+        matrix.mapPoints(dst, src);
+        return dst;
     }
 
     public void setOnSizeChangeListener(OnSizeChangeListener listener) {
         mOnSizeChangedListener = listener;
     }
 
-    public static class MatrixBitmap {
+    public static class ImageGroup {
         public Bitmap bitmap;
-        public Matrix matrix  = new Matrix();
+        public Matrix matrix = new Matrix();
 
-        public void release(){
-            if(bitmap != null) {
+        public void release() {
+            if (bitmap != null) {
                 bitmap.recycle();
+                bitmap = null;
             }
-            if(matrix != null) {
+
+            if (matrix != null) {
                 matrix.reset();
+                matrix = null;
             }
         }
     }
