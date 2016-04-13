@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">HealthManager</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main">首页</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_personal_information">个人信息</string>
+    <string name="nav_medical_data">医疗数据</string>
+    <string name="nav_hospital_data">住院数据</string>
+    <string name="nav_examination_data">体检数据</string>
+    <string name="nav_clinic_data">门诊数据</string>
+    <string name="nav_function">功能</string>
+    <string name="nav_setting">设置</string>
+    <string name="nav_about">关于</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

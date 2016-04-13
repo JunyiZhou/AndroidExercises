@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/nav_medical_data">
+        <menu>
+            <item
+                android:id="@+id/nav_clinic"
+                android:icon="@drawable/ic_description"
+                android:title="@string/nav_clinic_data" />
+            <item
+                android:id="@+id/nav_hospital"
+                android:icon="@drawable/ic_description"
+                android:title="@string/nav_hospital_data" />
+            <item
+                android:id="@+id/nav_examination"
+                android:icon="@drawable/ic_description"
+                android:title="@string/nav_examination_data" />
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_function">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/nav_setting" />
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_info"
+                android:title="@string/nav_about" />
+        </menu>
+    </item>
+</menu>
