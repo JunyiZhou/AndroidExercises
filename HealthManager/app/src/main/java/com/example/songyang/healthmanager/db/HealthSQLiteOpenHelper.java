@@ -15,7 +15,9 @@ public class HealthSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQLS.CREATE_USER_TABLE);
-        db.execSQL(SQLS.CREATE_RECORD_TABLE);
+        db.execSQL(SQLS.CREATE_CLINIC_TABLE);
+        db.execSQL(SQLS.CREATE_HOSPITAL_TABLE);
+        db.execSQL(SQLS.CREATE_EXAMINATION_TABLE);
     }
 
     @Override

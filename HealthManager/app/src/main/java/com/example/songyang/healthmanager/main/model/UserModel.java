@@ -19,7 +19,7 @@ public class UserModel implements IUserModel {
     public UserBean get(int id) {
         if (users != null) {
             for (UserBean user : users) {
-                if (user.getId() == id) {
+                if (user.getUserid() == id) {
                     return user;
                 }
             }

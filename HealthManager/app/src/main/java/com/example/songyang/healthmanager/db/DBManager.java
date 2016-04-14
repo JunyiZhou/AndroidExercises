@@ -3,10 +3,18 @@ package com.example.songyang.healthmanager.db;
 import android.support.annotation.WorkerThread;
 
 import com.example.songyang.healthmanager.HealthManagerApplication;
-import com.example.songyang.healthmanager.bean.RecordBean;
-import com.example.songyang.healthmanager.bean.RecordBeanStorIOSQLiteDeleteResolver;
-import com.example.songyang.healthmanager.bean.RecordBeanStorIOSQLiteGetResolver;
-import com.example.songyang.healthmanager.bean.RecordBeanStorIOSQLitePutResolver;
+import com.example.songyang.healthmanager.bean.ClinicBean;
+import com.example.songyang.healthmanager.bean.ClinicBeanStorIOSQLiteDeleteResolver;
+import com.example.songyang.healthmanager.bean.ClinicBeanStorIOSQLiteGetResolver;
+import com.example.songyang.healthmanager.bean.ClinicBeanStorIOSQLitePutResolver;
+import com.example.songyang.healthmanager.bean.ExaminationBean;
+import com.example.songyang.healthmanager.bean.ExaminationBeanStorIOSQLiteDeleteResolver;
+import com.example.songyang.healthmanager.bean.ExaminationBeanStorIOSQLiteGetResolver;
+import com.example.songyang.healthmanager.bean.ExaminationBeanStorIOSQLitePutResolver;
+import com.example.songyang.healthmanager.bean.HospitalBean;
+import com.example.songyang.healthmanager.bean.HospitalBeanStorIOSQLiteDeleteResolver;
+import com.example.songyang.healthmanager.bean.HospitalBeanStorIOSQLiteGetResolver;
+import com.example.songyang.healthmanager.bean.HospitalBeanStorIOSQLitePutResolver;
 import com.example.songyang.healthmanager.bean.UserBean;
 import com.example.songyang.healthmanager.bean.UserBeanStorIOSQLiteDeleteResolver;
 import com.example.songyang.healthmanager.bean.UserBeanStorIOSQLiteGetResolver;
@@ -34,10 +42,20 @@ public class DBManager {
                         .getResolver(new UserBeanStorIOSQLiteGetResolver())
                         .deleteResolver(new UserBeanStorIOSQLiteDeleteResolver())
                         .build())
-                .addTypeMapping(RecordBean.class, SQLiteTypeMapping.<RecordBean>builder()
-                        .putResolver(new RecordBeanStorIOSQLitePutResolver())
-                        .getResolver(new RecordBeanStorIOSQLiteGetResolver())
-                        .deleteResolver(new RecordBeanStorIOSQLiteDeleteResolver())
+                .addTypeMapping(ClinicBean.class, SQLiteTypeMapping.<ClinicBean>builder()
+                        .putResolver(new ClinicBeanStorIOSQLitePutResolver())
+                        .getResolver(new ClinicBeanStorIOSQLiteGetResolver())
+                        .deleteResolver(new ClinicBeanStorIOSQLiteDeleteResolver())
+                        .build())
+                .addTypeMapping(HospitalBean.class, SQLiteTypeMapping.<HospitalBean>builder()
+                        .putResolver(new HospitalBeanStorIOSQLitePutResolver())
+                        .getResolver(new HospitalBeanStorIOSQLiteGetResolver())
+                        .deleteResolver(new HospitalBeanStorIOSQLiteDeleteResolver())
+                        .build())
+                .addTypeMapping(ExaminationBean.class, SQLiteTypeMapping.<ExaminationBean>builder()
+                        .putResolver(new ExaminationBeanStorIOSQLitePutResolver())
+                        .getResolver(new ExaminationBeanStorIOSQLiteGetResolver())
+                        .deleteResolver(new ExaminationBeanStorIOSQLiteDeleteResolver())
                         .build())
                 .build();
     }
@@ -62,7 +80,7 @@ public class DBManager {
                         .table("user")
                         .where("id = " + id)
                         .build())
-                .withGetResolver(new UserBeanStorIOSQLiteGetResolver()) // here we set custom GetResolver for Get Operation
+                .withGetResolver(new UserBeanStorIOSQLiteGetResolver())
                 .prepare()
                 .executeAsBlocking();
     }
@@ -75,7 +93,7 @@ public class DBManager {
                 .withQuery(Query.builder()
                         .table("user")
                         .build())
-                .withGetResolver(new UserBeanStorIOSQLiteGetResolver()) // here we set custom GetResolver for Get Operation
+                .withGetResolver(new UserBeanStorIOSQLiteGetResolver())
                 .prepare()
                 .executeAsBlocking();
     }

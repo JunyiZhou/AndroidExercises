@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mMainPresenter.getUser(2);
+                mMainPresenter.loadUser(2);
             }
         });
     }

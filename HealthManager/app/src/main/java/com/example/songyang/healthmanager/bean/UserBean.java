@@ -8,38 +8,52 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
  */
 @StorIOSQLiteType(table = "user")
 public class UserBean {
-    public UserBean() {
-    }
+    @StorIOSQLiteColumn(name = "userid", key = true)
+    int userid;
 
-    public UserBean(int id, String name, String password) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-    }
-
-    @StorIOSQLiteColumn(name = "id", key = true)
-    int id;
-
-    @StorIOSQLiteColumn(name = "name")
-    String name;
+    @StorIOSQLiteColumn(name = "username")
+    String username;
 
     @StorIOSQLiteColumn(name = "password")
     String password;
 
-    public int getId() {
-        return id;
+    @StorIOSQLiteColumn(name = "sex")
+    String sex;
+
+    @StorIOSQLiteColumn(name = "age")
+    int age;
+
+    @StorIOSQLiteColumn(name = "nation")
+    String nation;
+
+    @StorIOSQLiteColumn(name = "phone")
+    String phone;
+
+    @StorIOSQLiteColumn(name = "idcard")
+    String idcard;
+
+    public String getIdcard() {
+        return idcard;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
     }
 
-    public String getName() {
-        return name;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -48,5 +62,37 @@ public class UserBean {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getNation() {
+        return nation;
+    }
+
+    public void setNation(String nation) {
+        this.nation = nation;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

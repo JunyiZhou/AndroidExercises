@@ -14,6 +14,8 @@ import com.example.songyang.healthmanager.R;
 import com.example.songyang.healthmanager.component.IOnItemClickListener;
 import com.example.songyang.healthmanager.component.IOnItemLongClickListener;
 import com.example.songyang.healthmanager.component.RecyclerListFragment;
+import com.example.songyang.healthmanager.rostrum.presenter.IRostrumPresenter;
+import com.example.songyang.healthmanager.rostrum.presenter.RostrumPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +23,12 @@ import java.util.List;
 /**
  * Created by JunyiZhou on 2016/4/13.
  */
-public class RostrumFragment extends RecyclerListFragment implements IOnItemClickListener, IOnItemLongClickListener {
-    private List<String> mDataList;
+public class RostrumFragment extends RecyclerListFragment implements IRostrumView, IOnItemClickListener, IOnItemLongClickListener {
+    private IRostrumPresenter mRostrumPresenter;
+
+    public RostrumFragment() {
+        mRostrumPresenter = new RostrumPresenter(this);
+    }
 
     public static RostrumFragment newInstance() {
         RostrumFragment fragment = new RostrumFragment();
@@ -32,9 +38,10 @@ public class RostrumFragment extends RecyclerListFragment implements IOnItemClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
         setOnItemClickListener(this);
         setOnItemLongClickListener(this);
+
+        mRostrumPresenter.load();
     }
 
     @Override
@@ -42,12 +49,9 @@ public class RostrumFragment extends RecyclerListFragment implements IOnItemClic
         return new CharViewHolder(parent);
     }
 
-    protected void initData() {
-        mDataList = new ArrayList<>();
-        for (int i = 'A'; i < 'Z'; i++) {
-            mDataList.add("" + (char) i);
-        }
-        setDataList(mDataList);
+    @Override
+    public void setRostrumData(List<String> rostrumData) {
+        setDataList(rostrumData);
     }
 
     @Override

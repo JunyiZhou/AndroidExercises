@@ -7,12 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.songyang.healthmanager.R;
+import com.example.songyang.healthmanager.hospital.presenter.HospitalPresenter;
+import com.example.songyang.healthmanager.hospital.presenter.IHospitalPresenter;
 
 /**
  * Created by JunyiZhou on 2016/4/13.
  */
-public class HospitalFragment extends Fragment {
+public class HospitalFragment extends Fragment implements IHospitalView {
+    private IHospitalPresenter mHospitalPresenter;
+
     public HospitalFragment() {
+        mHospitalPresenter = new HospitalPresenter(this);
     }
 
     public static HospitalFragment newInstance() {

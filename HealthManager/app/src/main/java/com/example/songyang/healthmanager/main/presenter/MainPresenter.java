@@ -18,8 +18,8 @@ public class MainPresenter implements IMainPresenter{
     }
 
     @Override
-    public void getUser(int id) {
+    public void loadUser(int id) {
         UserBean user = mUserModel.get(id);
-        mMainView.setUserName(user.getName());
+        mMainView.setUserName(user.getUsername());
     }
 }
