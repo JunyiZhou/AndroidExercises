@@ -37,6 +37,7 @@ public class LineDiagramView extends View {
     private float[] mValues;//象限内显示的坐标值
     private String[] mValuesStr;//坐标值String
     private Bitmap mPointBitmap;//圆点bitmap
+    private Bitmap mBubbleBitmap;//气泡bitmap
     private String[] mXParams;//x轴横坐标
     private DiagramAnimation diagramAnimation;//折线动画
     private int[] mYParams;//y轴纵坐标标量
@@ -96,6 +97,9 @@ public class LineDiagramView extends View {
         mPointBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.linechart_point);
         X_POINT_OFFSET = mPointBitmap.getWidth() / 2;
         Y_POINT_OFFSET = mPointBitmap.getHeight() / 2;
+        mBubbleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.linechart_bubble);
+        X_BUBBLE_OFFSET = mBubbleBitmap.getWidth() / 2;
+        Y_BUBBLE_OFFSET = mBubbleBitmap.getHeight() + dp2px(5);
     }
 
     /**
@@ -148,7 +152,7 @@ public class LineDiagramView extends View {
         X_PART_NUM = mValuesStr.length;
         HORIZONTAL_SPACE = (VIEW_WIDTH - LINE_WIDTH - X_OFFSET) / (X_PART_NUM + 1);
         float X_START_POINT = X_OFFSET;
-        float Y_START_POINT = VERTICAL_SPACE;
+        float Y_START_POINT = VIEW_HEIGHT;
         float X_END_POINT = VIEW_WIDTH;
         float Y_END_POINT = VIEW_HEIGHT;
 
@@ -228,6 +232,7 @@ public class LineDiagramView extends View {
             for (int i = 0; i < brokenLineActualPoints.subList(1, brokenLineActualPoints.size() - 1).size(); i++) {
                 PointF point = brokenLineActualPoints.subList(1, brokenLineActualPoints.size() - 1).get(i);
                 canvas.drawBitmap(mPointBitmap, point.x - X_POINT_OFFSET, point.y - Y_POINT_OFFSET, bitmapPaint);
+                canvas.drawBitmap(mBubbleBitmap, point.x - X_BUBBLE_OFFSET, point.y - Y_POINT_OFFSET - Y_BUBBLE_OFFSET, bitmapPaint);
                 canvas.drawText(mValuesStr[i], point.x, point.y - Y_POINT_OFFSET - Y_VALUE_OFFSET, valueTextPaint);
             }
         }

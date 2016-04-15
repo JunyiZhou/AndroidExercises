@@ -1,30 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp">
+    app:cardCornerRadius="5dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="128dp"
-        app:cardCornerRadius="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="一项运动预防颈椎病" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="名医讲堂"
-                android:textSize="18sp" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#eeeeee" />
 
-</FrameLayout>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/item_adv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            fresco:actualImageScaleType="focusCrop"
+            fresco:backgroundImage="@android:color/holo_orange_light"
+            fresco:fadeDuration="2000"
+            fresco:failureImage="@drawable/ic_failure"
+            fresco:failureImageScaleType="centerInside"
+            fresco:placeholderImage="@drawable/item_image_placeholder"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:progressBarAutoRotateInterval="2000"
+            fresco:progressBarImage="@drawable/ic_progress_bar"
+            fresco:progressBarImageScaleType="centerInside"
+            fresco:retryImage="@drawable/ic_retry"
+            fresco:retryImageScaleType="centerCrop"
+            fresco:viewAspectRatio="1" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:background="#eeeeee" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="3dp"
+            android:text="颈椎是个结构复杂的部位，而颈椎病又是个病因众多且表现多样的疾病。\n颈椎是脊柱的一部分，共由七块椎骨及椎间盘等软组织组成，其内走行供给大脑血液的椎动脉，脊髓及分支神经，外有数条韧带及肌肉附着。\n由于椎间盘退行性变，颈椎骨质增生等引起的一系列临床综合征称为颈椎病。由于受到损害的组织不同可以分为颈型、神经根型、脊髓型、椎动脉型、交感神经型、其他型和混合型。" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

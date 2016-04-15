@@ -1,5 +1,6 @@
 package com.example.songyang.healthmanager.rostrum.view;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.songyang.healthmanager.R;
 import com.example.songyang.healthmanager.component.IOnItemClickListener;
@@ -16,8 +15,10 @@ import com.example.songyang.healthmanager.component.IOnItemLongClickListener;
 import com.example.songyang.healthmanager.component.RecyclerListFragment;
 import com.example.songyang.healthmanager.rostrum.presenter.IRostrumPresenter;
 import com.example.songyang.healthmanager.rostrum.presenter.RostrumPresenter;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,17 +86,35 @@ public class RostrumFragment extends RecyclerListFragment implements IRostrumVie
     }
 
     class CharViewHolder extends ViewHolder<String> {
+        private SimpleDraweeView simpleDraweeView;
+
         public CharViewHolder(ViewGroup parent) {
             this(LayoutInflater.from(getActivity()).inflate(R.layout.item_rostrum, parent, false));
         }
 
         public CharViewHolder(View view) {
             super(view);
+            simpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.item_adv);
         }
 
         @Override
         public void bind(String item, int position) {
+            Uri imageUri = Uri.parse("http://www.nmg.xinhuanet.com/home/ws/2015-10/12/1116794592_14446212002811n.jpg");
+            simpleDraweeView.setImageURI(imageUri);
+            simpleDraweeView.setAspectRatio(1);
+            //创建DraweeController
+            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                    //加载的图片URI地址
+                    .setUri(imageUri)
+                            //设置点击重试是否开启
+                    .setTapToRetryEnabled(true)
+                            //设置旧的Controller
+                    .setOldController(simpleDraweeView.getController())
+                            //构建
+                    .build();
 
+            //设置DraweeController
+            simpleDraweeView.setController(controller);
         }
     }
 }

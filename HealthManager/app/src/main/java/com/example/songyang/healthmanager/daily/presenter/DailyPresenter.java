@@ -1,13 +1,9 @@
 package com.example.songyang.healthmanager.daily.presenter;
 
 import com.example.songyang.healthmanager.bean.StepBean;
-import com.example.songyang.healthmanager.bean.UserBean;
 import com.example.songyang.healthmanager.daily.model.DailyModel;
 import com.example.songyang.healthmanager.daily.model.IDailyModel;
 import com.example.songyang.healthmanager.daily.view.IDailyView;
-import com.example.songyang.healthmanager.main.model.IUserModel;
-import com.example.songyang.healthmanager.main.model.UserModel;
-import com.example.songyang.healthmanager.main.view.IMainView;
 
 import java.util.List;
 
@@ -26,10 +22,10 @@ public class DailyPresenter implements IDailyPresenter {
     @Override
     public void loadLineDiagramData() {
         List<StepBean> steps = mDailyModel.getSteps();
-        int[] yParams = {40, 60, 80, 100};
-        float[] values = {40.1f, 60.4f, 80.3f};
-        String[] xParams = {"4月", "5月", "6月"};
+        int[] yParams = {4000, 6000, 8000, 10000};
+        float[] values = {4500, 6900, 9000};
+        String[] xParams = {"2016-4-12", "2016-4-13", "2016-4-14"};
 
-        mDailyView.setLineDiagramData(yParams, values, xParams, "万");
+        mDailyView.setLineDiagramData(yParams, values, xParams, "步");
     }
 }

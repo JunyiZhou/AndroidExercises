@@ -1,5 +1,7 @@
 package com.example.songyang.healthmanager.hospital.model;
 
+import android.net.Uri;
+
 import com.example.songyang.healthmanager.bean.StepBean;
 
 import java.util.List;
@@ -8,4 +10,5 @@ import java.util.List;
  * Created by JunyiZhou on 2016/4/13.
  */
 public interface IHospitalModel {
+    Uri getImageUri();
 }

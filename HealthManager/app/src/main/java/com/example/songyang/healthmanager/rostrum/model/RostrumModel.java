@@ -12,8 +12,8 @@ public class RostrumModel implements IRostrumModel {
     @Override
     public List<String> getRostrumData() {
         List<String> rostrumData = new ArrayList<>();
-        for (int i = 'A'; i < 'Z'; i++) {
-            rostrumData.add("" + (char) i);
+        for (int i = 0; i < 5; i++) {
+            rostrumData.add(String.valueOf(i));
         }
         return rostrumData;
     }

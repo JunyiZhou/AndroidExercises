@@ -14,8 +14,16 @@ public class StepBean {
     @StorIOSQLiteColumn(name = "count")
     int count;
 
-    @StorIOSQLiteColumn(name = "date")
-    String date;
+    @StorIOSQLiteColumn(name = "time")
+    long time;
+
+    public int getStepid() {
+        return stepid;
+    }
+
+    public void setStepid(int stepid) {
+        this.stepid = stepid;
+    }
 
     public int getCount() {
         return count;
@@ -25,19 +33,11 @@ public class StepBean {
         this.count = count;
     }
 
-    public String getDate() {
-        return date;
+    public long getDate() {
+        return time;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public int getStepid() {
-        return stepid;
-    }
-
-    public void setStepid(int stepid) {
-        this.stepid = stepid;
+    public void setDate(long date) {
+        this.time = date;
     }
 }
