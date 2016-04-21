@@ -1,5 +1,8 @@
 package com.example.songyang.healthmanager.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteColumn;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 
@@ -7,7 +10,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
  * Created by JunyiZhou on 2016/4/14.
  */
 @StorIOSQLiteType(table = "hospital")
-public class HospitalBean {
+public class HospitalBean implements Parcelable {
     @StorIOSQLiteColumn(name = "hospitalid", key = true)
     int hospitalid;
 
@@ -73,4 +76,41 @@ public class HospitalBean {
     public void setHresult(String hresult) {
         this.hresult = hresult;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.hospitalid);
+        dest.writeInt(this.userid);
+        dest.writeLong(this.htime);
+        dest.writeString(this.hdianose);
+        dest.writeInt(this.hday);
+        dest.writeString(this.hresult);
+    }
+
+    public HospitalBean() {
+    }
+
+    protected HospitalBean(Parcel in) {
+        this.hospitalid = in.readInt();
+        this.userid = in.readInt();
+        this.htime = in.readLong();
+        this.hdianose = in.readString();
+        this.hday = in.readInt();
+        this.hresult = in.readString();
+    }
+
+    public static final Creator<HospitalBean> CREATOR = new Creator<HospitalBean>() {
+        public HospitalBean createFromParcel(Parcel source) {
+            return new HospitalBean(source);
+        }
+
+        public HospitalBean[] newArray(int size) {
+            return new HospitalBean[size];
+        }
+    };
 }

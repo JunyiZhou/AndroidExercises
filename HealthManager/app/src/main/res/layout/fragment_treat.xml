@@ -1,0 +1,75 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="56dp"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="56dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="5dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="哈尔滨工业大学医院"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#eeeeee" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/item_adv"
+                    fresco:actualImageScaleType="focusCrop"
+                    fresco:backgroundImage="@android:color/holo_orange_light"
+                    fresco:fadeDuration="2000"
+                    fresco:failureImage="@drawable/ic_failure"
+                    fresco:failureImageScaleType="centerInside"
+                    fresco:placeholderImage="@drawable/item_image_placeholder"
+                    fresco:placeholderImageScaleType="fitCenter"
+                    fresco:progressBarAutoRotateInterval="2000"
+                    fresco:progressBarImage="@drawable/ic_progress_bar"
+                    fresco:progressBarImageScaleType="centerInside"
+                    fresco:retryImage="@drawable/ic_retry"
+                    fresco:retryImageScaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#eeeeee" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="3dp"
+                    android:gravity="center_vertical"
+                    android:text="哈尔滨工业大学医院是一家集多科室为一体的综合性、面向大众的现代化综合性医疗机构。就医环境优雅，交通便利，就诊流程便捷，诊疗管理规范，医疗设备先进。坚持以人为本，缔造健康、真诚服务、追求卓越的经营理念。竭诚为您服务。 " />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</ScrollView>

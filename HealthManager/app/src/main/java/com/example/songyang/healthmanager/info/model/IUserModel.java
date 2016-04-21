@@ -1,4 +1,4 @@
-package com.example.songyang.healthmanager.main.model;
+package com.example.songyang.healthmanager.info.model;
 
 import com.example.songyang.healthmanager.bean.UserBean;
 

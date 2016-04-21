@@ -1,5 +1,8 @@
 package com.example.songyang.healthmanager.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteColumn;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 
@@ -7,7 +10,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
  * Created by JunyiZhou on 2016/4/14.
  */
 @StorIOSQLiteType(table = "examination")
-public class ExaminationBean {
+public class ExaminationBean implements Parcelable {
     @StorIOSQLiteColumn(name = "examinationid", key = true)
     int examinationid;
 
@@ -227,4 +230,69 @@ public class ExaminationBean {
     public void setEtc(float etc) {
         this.etc = etc;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.examinationid);
+        dest.writeInt(this.userid);
+        dest.writeLong(this.etime);
+        dest.writeFloat(this.etcho);
+        dest.writeString(this.epressure);
+        dest.writeFloat(this.ebmi);
+        dest.writeInt(this.edbp);
+        dest.writeInt(this.esys);
+        dest.writeFloat(this.eglu);
+        dest.writeString(this.eliverc);
+        dest.writeString(this.ekidneyc);
+        dest.writeString(this.eglanc);
+        dest.writeString(this.emilkc);
+        dest.writeString(this.echest);
+        dest.writeString(this.egutc);
+        dest.writeInt(this.eph);
+        dest.writeFloat(this.epissglu);
+        dest.writeString(this.eeyepre);
+        dest.writeString(this.epanc);
+        dest.writeFloat(this.etc);
+    }
+
+    public ExaminationBean() {
+    }
+
+    protected ExaminationBean(Parcel in) {
+        this.examinationid = in.readInt();
+        this.userid = in.readInt();
+        this.etime = in.readLong();
+        this.etcho = in.readFloat();
+        this.epressure = in.readString();
+        this.ebmi = in.readFloat();
+        this.edbp = in.readInt();
+        this.esys = in.readInt();
+        this.eglu = in.readFloat();
+        this.eliverc = in.readString();
+        this.ekidneyc = in.readString();
+        this.eglanc = in.readString();
+        this.emilkc = in.readString();
+        this.echest = in.readString();
+        this.egutc = in.readString();
+        this.eph = in.readInt();
+        this.epissglu = in.readFloat();
+        this.eeyepre = in.readString();
+        this.epanc = in.readString();
+        this.etc = in.readFloat();
+    }
+
+    public static final Creator<ExaminationBean> CREATOR = new Creator<ExaminationBean>() {
+        public ExaminationBean createFromParcel(Parcel source) {
+            return new ExaminationBean(source);
+        }
+
+        public ExaminationBean[] newArray(int size) {
+            return new ExaminationBean[size];
+        }
+    };
 }

@@ -1,5 +1,8 @@
 package com.example.songyang.healthmanager.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteColumn;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 
@@ -7,7 +10,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
  * Created by JunyiZhou on 2016/4/12.
  */
 @StorIOSQLiteType(table = "user")
-public class UserBean {
+public class UserBean implements Parcelable{
     @StorIOSQLiteColumn(name = "userid", key = true)
     int userid;
 
@@ -95,4 +98,46 @@ public class UserBean {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.userid);
+        dest.writeString(this.username);
+        dest.writeString(this.password);
+        dest.writeString(this.sex);
+        dest.writeInt(this.age);
+        dest.writeString(this.nation);
+        dest.writeString(this.phone);
+        dest.writeString(this.idcard);
+    }
+
+    public UserBean() {
+    }
+
+    protected UserBean(Parcel in) {
+        this.userid = in.readInt();
+        this.username = in.readString();
+        this.password = in.readString();
+        this.sex = in.readString();
+        this.age = in.readInt();
+        this.nation = in.readString();
+        this.phone = in.readString();
+        this.idcard = in.readString();
+    }
+
+    public static final Creator<UserBean> CREATOR = new Creator<UserBean>() {
+        public UserBean createFromParcel(Parcel source) {
+            return new UserBean(source);
+        }
+
+        public UserBean[] newArray(int size) {
+            return new UserBean[size];
+        }
+    };
 }

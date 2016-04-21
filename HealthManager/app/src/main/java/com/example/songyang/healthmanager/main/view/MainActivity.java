@@ -1,5 +1,6 @@
 package com.example.songyang.healthmanager.main.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -22,7 +23,8 @@ import android.widget.Toast;
 
 import com.example.songyang.healthmanager.R;
 import com.example.songyang.healthmanager.daily.view.DailyFragment;
-import com.example.songyang.healthmanager.hospital.view.HospitalFragment;
+import com.example.songyang.healthmanager.treat.view.TreatFragment;
+import com.example.songyang.healthmanager.info.view.InfoActivity;
 import com.example.songyang.healthmanager.main.presenter.IMainPresenter;
 import com.example.songyang.healthmanager.main.presenter.MainPresenter;
 import com.example.songyang.healthmanager.rostrum.view.RostrumFragment;
@@ -89,6 +91,13 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
 
     public void initNavigationView() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InfoActivity.startInfoActivity(MainActivity.this, InfoActivity.INFO_PROFILE);
+            }
+        });
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -108,11 +117,11 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
         int id = item.getItemId();
 
         if (id == R.id.nav_clinic) {
-
+            InfoActivity.startInfoActivity(this, InfoActivity.INFO_CLINIC);
         } else if (id == R.id.nav_hospital) {
-
+            InfoActivity.startInfoActivity(this, InfoActivity.INFO_HOSPITAL);
         } else if (id == R.id.nav_examination) {
-
+            InfoActivity.startInfoActivity(this, InfoActivity.INFO_EXAMINATION);
         } else if (id == R.id.nav_setting) {
 
         } else if (id == R.id.nav_about) {
@@ -129,30 +138,6 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
         Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
     }
 
-    public static class PlaceholderFragment extends Fragment {
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -167,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
                 case 1:
                     return RostrumFragment.newInstance();
                 case 2:
-                    return HospitalFragment.newInstance();
+                    return TreatFragment.newInstance();
             }
             return null;
         }

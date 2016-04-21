@@ -8,10 +8,10 @@ import java.util.List;
 /**
  * Created by JunyiZhou on 2016/4/13.
  */
-public class UserModel implements IUserModel {
+public class MainModel implements IMainModel {
     private List<UserBean> users;
 
-    public UserModel() {
+    public MainModel() {
         users = DBManager.getInstance().getUsers();
     }
 

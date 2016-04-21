@@ -1,5 +1,8 @@
 package com.example.songyang.healthmanager.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteColumn;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 
@@ -7,7 +10,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
  * Created by JunyiZhou on 2016/4/12.
  */
 @StorIOSQLiteType(table = "record")
-public class ClinicBean {
+public class ClinicBean implements Parcelable{
     @StorIOSQLiteColumn(name = "clinicid", key = true)
     int clinicid;
 
@@ -172,4 +175,59 @@ public class ClinicBean {
     public void setCsugar(float csugar) {
         this.csugar = csugar;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.clinicid);
+        dest.writeInt(this.userid);
+        dest.writeString(this.conclusion);
+        dest.writeString(this.cdocter);
+        dest.writeLong(this.ctime);
+        dest.writeString(this.chistory);
+        dest.writeString(this.ctest);
+        dest.writeString(this.cresult);
+        dest.writeString(this.crecommend);
+        dest.writeFloat(this.ccholesterin);
+        dest.writeFloat(this.cgao);
+        dest.writeFloat(this.cdi);
+        dest.writeFloat(this.cserumo);
+        dest.writeFloat(this.cserumm);
+        dest.writeFloat(this.csugar);
+    }
+
+    public ClinicBean() {
+    }
+
+    protected ClinicBean(Parcel in) {
+        this.clinicid = in.readInt();
+        this.userid = in.readInt();
+        this.conclusion = in.readString();
+        this.cdocter = in.readString();
+        this.ctime = in.readLong();
+        this.chistory = in.readString();
+        this.ctest = in.readString();
+        this.cresult = in.readString();
+        this.crecommend = in.readString();
+        this.ccholesterin = in.readFloat();
+        this.cgao = in.readFloat();
+        this.cdi = in.readFloat();
+        this.cserumo = in.readFloat();
+        this.cserumm = in.readFloat();
+        this.csugar = in.readFloat();
+    }
+
+    public static final Creator<ClinicBean> CREATOR = new Creator<ClinicBean>() {
+        public ClinicBean createFromParcel(Parcel source) {
+            return new ClinicBean(source);
+        }
+
+        public ClinicBean[] newArray(int size) {
+            return new ClinicBean[size];
+        }
+    };
 }
