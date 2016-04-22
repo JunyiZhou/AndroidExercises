@@ -51,7 +51,7 @@ public class RostrumFragment extends RecyclerListFragment implements IRostrumVie
     }
 
     @Override
-    public void setRostrumData(List<String> rostrumData) {
+    public void setRostrumData(List rostrumData) {
         setDataList(rostrumData);
     }
 
@@ -77,12 +77,12 @@ public class RostrumFragment extends RecyclerListFragment implements IRostrumVie
 
     @Override
     public void onItemClick(View view, int position) {
-        addData(position, "CYP");
+
     }
 
     @Override
     public void onItemLongClick(View view, int position) {
-        removeData(position);
+
     }
 
     class CharViewHolder extends ViewHolder<String> {

@@ -1,14 +1,26 @@
 package com.example.songyang.healthmanager.treat.model;
 
-import android.net.Uri;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by JunyiZhou on 2016/4/13.
  */
 public class TreatModel implements ITreatModel {
+
     @Override
-    public Uri getImageUri() {
-        Uri imageUri = Uri.parse("http://pic.baike.soso.com/p/20131112/20131112171121-299012034.jpg");
-        return imageUri;
+    public List<String> getDepartmentData() {
+        List<String> departmentData = new ArrayList<>();
+        departmentData.add("");
+        departmentData.add("儿科");
+        departmentData.add("皮肤科");
+        departmentData.add("内科");
+        departmentData.add("中医科");
+        departmentData.add("眼科");
+        departmentData.add("口腔科");
+        departmentData.add("骨伤科");
+        departmentData.add("耳鼻喉科");
+        departmentData.add("妇科");
+        return departmentData;
     }
 }
