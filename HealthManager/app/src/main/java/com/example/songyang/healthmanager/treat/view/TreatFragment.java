@@ -1,5 +1,6 @@
 package com.example.songyang.healthmanager.treat.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -105,7 +106,13 @@ public class TreatFragment extends RecyclerListFragment implements ITreatView, I
 
     @Override
     public void onItemClick(View view, int position) {
+        if (position == 0) {
+            return;
+        }
 
+        Intent intent = new Intent(getActivity(), DepartmentDetailActivity.class);
+        intent.putExtra("DEPARTMENT_NAME", (String) getDataList().get(position));
+        startActivity(intent);
     }
 
     @Override

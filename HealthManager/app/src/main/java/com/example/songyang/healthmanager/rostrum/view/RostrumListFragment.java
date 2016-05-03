@@ -1,13 +1,17 @@
 package com.example.songyang.healthmanager.rostrum.view;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.songyang.healthmanager.R;
 import com.example.songyang.healthmanager.component.IOnItemClickListener;
@@ -15,6 +19,7 @@ import com.example.songyang.healthmanager.component.IOnItemLongClickListener;
 import com.example.songyang.healthmanager.component.RecyclerListFragment;
 import com.example.songyang.healthmanager.rostrum.presenter.IRostrumPresenter;
 import com.example.songyang.healthmanager.rostrum.presenter.RostrumPresenter;
+import com.example.songyang.healthmanager.util.PictureUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -24,15 +29,15 @@ import java.util.List;
 /**
  * Created by JunyiZhou on 2016/4/13.
  */
-public class RostrumFragment extends RecyclerListFragment implements IRostrumView, IOnItemClickListener, IOnItemLongClickListener {
+public class RostrumListFragment extends RecyclerListFragment implements IRostrumView, IOnItemClickListener, IOnItemLongClickListener {
     private IRostrumPresenter mRostrumPresenter;
 
-    public RostrumFragment() {
+    public RostrumListFragment() {
         mRostrumPresenter = new RostrumPresenter(this);
     }
 
-    public static RostrumFragment newInstance() {
-        RostrumFragment fragment = new RostrumFragment();
+    public static RostrumListFragment newInstance() {
+        RostrumListFragment fragment = new RostrumListFragment();
         return fragment;
     }
 
@@ -45,9 +50,28 @@ public class RostrumFragment extends RecyclerListFragment implements IRostrumVie
         mRostrumPresenter.load();
     }
 
+    private TextView screenShot;
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_recycler_list_temp, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        screenShot = (TextView) view.findViewById(R.id.screen_shot);
+        screenShot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bitmap bitmap = PictureUtil.getRecyclerViewScreenshot(getRecyclerView());
+                PictureUtil.CreateNewPhoto(PictureUtil.getTempFilePath(getActivity()), bitmap);
+            }
+        });
+    }
+
     @Override
     public ViewHolder getViewHolder(ViewGroup parent) {
-        return new CharViewHolder(parent);
+        return new RostrumViewHolder(parent);
     }
 
     @Override
@@ -77,7 +101,7 @@ public class RostrumFragment extends RecyclerListFragment implements IRostrumVie
 
     @Override
     public void onItemClick(View view, int position) {
-
+        startActivity(new Intent(getActivity(), RostrumDetailActivity.class));
     }
 
     @Override
@@ -85,14 +109,14 @@ public class RostrumFragment extends RecyclerListFragment implements IRostrumVie
 
     }
 
-    class CharViewHolder extends ViewHolder<String> {
+    class RostrumViewHolder extends ViewHolder<String> {
         private SimpleDraweeView simpleDraweeView;
 
-        public CharViewHolder(ViewGroup parent) {
+        public RostrumViewHolder(ViewGroup parent) {
             this(LayoutInflater.from(getActivity()).inflate(R.layout.item_rostrum, parent, false));
         }
 
-        public CharViewHolder(View view) {
+        public RostrumViewHolder(View view) {
             super(view);
             simpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.item_adv);
         }

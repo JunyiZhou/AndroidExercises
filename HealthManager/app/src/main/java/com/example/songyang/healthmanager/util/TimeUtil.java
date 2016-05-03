@@ -25,6 +25,7 @@ public class TimeUtil {
     public static final String TEMPLATE_DATE_TIME_O_CLOCK_EXCLUDE_YEAR   = "MM月dd日 HH:00";
     public static final String TEMPLATE_DATE_TIME_O_CLOCK_ONLY           = "HH:00";
     public static final String TEMPLATE_DATE							 = "yyyy-MM-dd";
+    public static final String TEMPLATE_DATE_CHINESE					 = "yyyy年MM月dd日";
     public static final String TEMPLATE_TIME							 = "HH:mm:ss";
     public static final String TEMPLATE_DATE_TIME_FILENAME_WITH_MILLIS	 = "yyyyMMdd_HHmmssS";
     public static final String TEMPLATE_DATE_TIME_FILENAME 				 = "yyyyMMdd_HHmmss";

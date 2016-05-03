@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".main.view.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menu_messages"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_message_white"
+        app:showAsAction="always" />
 </menu>

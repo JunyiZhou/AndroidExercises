@@ -14,20 +14,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.songyang.healthmanager.R;
 import com.example.songyang.healthmanager.daily.view.DailyFragment;
+import com.example.songyang.healthmanager.message.MessageActivity;
 import com.example.songyang.healthmanager.treat.view.TreatFragment;
 import com.example.songyang.healthmanager.info.view.InfoActivity;
 import com.example.songyang.healthmanager.main.presenter.IMainPresenter;
 import com.example.songyang.healthmanager.main.presenter.MainPresenter;
-import com.example.songyang.healthmanager.rostrum.view.RostrumFragment;
+import com.example.songyang.healthmanager.rostrum.view.RostrumListFragment;
 
 public class MainActivity extends AppCompatActivity implements IMainView, NavigationView.OnNavigationItemSelectedListener {
 
@@ -102,6 +101,24 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_messages:
+                startActivity(new Intent(this, MessageActivity.class));
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -150,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
                 case 0:
                     return DailyFragment.newInstance();
                 case 1:
-                    return RostrumFragment.newInstance();
+                    return RostrumListFragment.newInstance();
                 case 2:
                     return TreatFragment.newInstance();
             }

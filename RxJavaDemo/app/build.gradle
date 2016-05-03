@@ -26,8 +26,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:design:22.2.1'
     compile 'io.reactivex:rxandroid:1.1.0'
-// Because RxAndroid releases are few and far between, it is recommended you also
-// explicitly depend on RxJava's latest version for bug fixes and new features.
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'

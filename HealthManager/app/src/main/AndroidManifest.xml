@@ -23,8 +23,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".info.view.InfoActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".info.view.InfoActivity" />
+        <activity
+            android:name=".rostrum.view.RostrumDetailActivity"
+            android:label="@string/title_activity_rostrum_detail" />
+        <activity
+            android:name=".message.MessageActivity"
+            android:label="@string/title_activity_message" />
+        <activity
+            android:name=".treat.view.DepartmentDetailActivity"
+            android:label="@string/title_activity_department_detail" />
+        <activity
+            android:name=".treat.view.TreatDetailActivity"
+            android:label="@string/title_activity_treat_detail"/>
     </application>
 
 </manifest>
