@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.songyang.healthmanager.R;
 import com.example.songyang.healthmanager.daily.view.DailyFragment;
+import com.example.songyang.healthmanager.login.view.LoginActivity;
 import com.example.songyang.healthmanager.message.MessageActivity;
 import com.example.songyang.healthmanager.treat.view.TreatFragment;
 import com.example.songyang.healthmanager.info.view.InfoActivity;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_messages:
                 startActivity(new Intent(this, MessageActivity.class));
                 break;
@@ -143,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
 
         } else if (id == R.id.nav_about) {
 
+        } else if (id == R.id.nav_login) {
+            LoginActivity.startInfoActivity(this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -163,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, Naviga
 
         @Override
         public Fragment getItem(int position) {
-    switch (position) {
+            switch (position) {
                 case 0:
                     return DailyFragment.newInstance();
                 case 1:

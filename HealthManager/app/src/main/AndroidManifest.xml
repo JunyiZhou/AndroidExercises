@@ -25,6 +25,7 @@
         </activity>
 
         <activity android:name=".info.view.InfoActivity" />
+        <activity android:name=".login.view.LoginActivity" />
         <activity
             android:name=".rostrum.view.RostrumDetailActivity"
             android:label="@string/title_activity_rostrum_detail" />

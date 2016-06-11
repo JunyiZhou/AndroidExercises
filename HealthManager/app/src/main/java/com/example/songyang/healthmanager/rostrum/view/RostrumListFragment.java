@@ -19,7 +19,6 @@ import com.example.songyang.healthmanager.component.IOnItemLongClickListener;
 import com.example.songyang.healthmanager.component.RecyclerListFragment;
 import com.example.songyang.healthmanager.rostrum.presenter.IRostrumPresenter;
 import com.example.songyang.healthmanager.rostrum.presenter.RostrumPresenter;
-import com.example.songyang.healthmanager.util.PictureUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -51,23 +50,6 @@ public class RostrumListFragment extends RecyclerListFragment implements IRostru
     }
 
     private TextView screenShot;
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recycler_list_temp, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        screenShot = (TextView) view.findViewById(R.id.screen_shot);
-        screenShot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bitmap bitmap = PictureUtil.getRecyclerViewScreenshot(getRecyclerView());
-                PictureUtil.CreateNewPhoto(PictureUtil.getTempFilePath(getActivity()), bitmap);
-            }
-        });
-    }
 
     @Override
     public ViewHolder getViewHolder(ViewGroup parent) {
