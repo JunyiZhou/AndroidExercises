@@ -27,6 +27,7 @@
                 android:id="@+id/password_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:hint="密码" />
 
             <TextView

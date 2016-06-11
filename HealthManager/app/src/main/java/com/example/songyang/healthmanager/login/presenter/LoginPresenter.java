@@ -18,13 +18,8 @@ public class LoginPresenter implements ILoginPresenter {
     }
 
     @Override
-    public boolean login(String userName, String password) {
+    public void login(String userName, String password) {
         boolean result = mLoginModel.checkUserAuthority(userName, password);
-        if (result) {
-            mLoginView.showLoginResult("登录成功");
-        } else {
-            mLoginView.showLoginResult("登录失败");
-        }
-        return false;
+        mLoginView.showLoginResult(result);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.songyang.healthmanager;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.example.songyang.healthmanager.bean.UserBean;
 import com.example.songyang.healthmanager.db.DBManager;
@@ -10,32 +11,30 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  * Created by JunyiZhou on 2016/4/12.
  */
 public class HealthManagerApplication extends Application {
-    private static HealthManagerApplication INSTANCE = null;
+    private static Context mContext;
 
-    public static synchronized HealthManagerApplication getInstance() {
-        return INSTANCE;
+    public static Context getContext() {
+        return mContext;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        INSTANCE = this;
+        mContext = getApplicationContext();
         Fresco.initialize(this);
         initData();
     }
 
     public void initData() {
-        for (int i = 0; i < 6; i++) {
-            UserBean userBean = new UserBean();
-            userBean.setUserid(i);
-            userBean.setUsername("tester" + i);
-            userBean.setSex("m");
-            userBean.setAge(20 + i);
-            userBean.setPassword("1234qwer");
-            userBean.setPhone(String.valueOf(i));
-            userBean.setIdcard(String.valueOf(i));
-            userBean.setNation("汉族");
-            DBManager.getInstance().putUser(userBean);
-        }
+        UserBean userBean = new UserBean();
+        userBean.setUserid(1);
+        userBean.setUsername("admin");
+        userBean.setSex("m");
+        userBean.setAge(20);
+        userBean.setPassword("123456");
+        userBean.setPhone("13800000000");
+        userBean.setIdcard("100000000000000000");
+        userBean.setNation("汉族");
+        DBManager.getInstance().putUser(userBean);
     }
 }

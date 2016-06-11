@@ -10,8 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.songyang.healthmanager.R;
+import com.example.songyang.healthmanager.login.event.UserLoginEvent;
 import com.example.songyang.healthmanager.login.presenter.ILoginPresenter;
 import com.example.songyang.healthmanager.login.presenter.LoginPresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class LoginFragment extends Fragment  implements ILoginView, View.OnClickListener{
 
@@ -56,8 +59,8 @@ public class LoginFragment extends Fragment  implements ILoginView, View.OnClick
     }
 
     @Override
-    public void showLoginResult(String result) {
-        Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+    public void showLoginResult(boolean result) {
+        EventBus.getDefault().post(new UserLoginEvent(result));
         getActivity().finish();
     }
 }

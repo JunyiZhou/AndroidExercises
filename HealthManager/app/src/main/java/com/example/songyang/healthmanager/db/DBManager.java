@@ -36,7 +36,7 @@ public class DBManager {
 
     private DBManager() {
         healthStorIOSQLite = DefaultStorIOSQLite.builder()
-                .sqliteOpenHelper(new HealthSQLiteOpenHelper(HealthManagerApplication.getInstance().getApplicationContext(), "health", 1))
+                .sqliteOpenHelper(new HealthSQLiteOpenHelper(HealthManagerApplication.getContext().getApplicationContext(), "health", 1))
                 .addTypeMapping(UserBean.class, SQLiteTypeMapping.<UserBean>builder()
                         .putResolver(new UserBeanStorIOSQLitePutResolver())
                         .getResolver(new UserBeanStorIOSQLiteGetResolver())
