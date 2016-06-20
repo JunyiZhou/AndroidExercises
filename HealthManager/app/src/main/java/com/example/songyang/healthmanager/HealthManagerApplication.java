@@ -8,7 +8,7 @@ import com.example.songyang.healthmanager.db.DBManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
- * Created by JunyiZhou on 2016/4/12.
+ * Created by SongYang on 2016/4/12.
  */
 public class HealthManagerApplication extends Application {
     private static Context mContext;

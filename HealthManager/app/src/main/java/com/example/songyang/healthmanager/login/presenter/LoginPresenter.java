@@ -5,7 +5,7 @@ import com.example.songyang.healthmanager.login.model.LoginModel;
 import com.example.songyang.healthmanager.login.view.ILoginView;
 
 /**
- * Created by JunyiZhou on 2016/4/13.
+ * Created by SongYang on 2016/4/13.
  */
 public class LoginPresenter implements ILoginPresenter {
 

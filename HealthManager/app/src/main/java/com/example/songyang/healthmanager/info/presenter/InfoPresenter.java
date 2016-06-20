@@ -14,7 +14,7 @@ import com.example.songyang.healthmanager.main.model.IMainModel;
 import com.example.songyang.healthmanager.main.model.MainModel;
 
 /**
- * Created by JunyiZhou on 2016/4/13.
+ * Created by SongYang on 2016/4/13.
  */
 public class InfoPresenter implements IInfoPresenter {
     private IMainModel mUserModel;

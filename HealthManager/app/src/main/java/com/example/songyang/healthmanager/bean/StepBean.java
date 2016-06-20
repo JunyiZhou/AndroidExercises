@@ -4,7 +4,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteColumn;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 
 /**
- * Created by JunyiZhou on 2016/4/14.
+ * Created by SongYang on 2016/4/14.
  */
 @StorIOSQLiteType(table = "step")
 public class StepBean {

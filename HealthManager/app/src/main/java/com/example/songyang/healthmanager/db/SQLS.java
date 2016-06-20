@@ -1,7 +1,7 @@
 package com.example.songyang.healthmanager.db;
 
 /**
- * Created by JunyiZhou on 2016/4/11.
+ * Created by SongYang on 2016/4/11.
  */
 public class SQLS {
     public static final String CREATE_USER_TABLE = "CREATE TABLE IF NOT EXISTS user(" +

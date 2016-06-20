@@ -6,7 +6,7 @@ import com.example.songyang.healthmanager.main.model.MainModel;
 import com.example.songyang.healthmanager.main.view.IMainView;
 
 /**
- * Created by JunyiZhou on 2016/4/13.
+ * Created by SongYang on 2016/4/13.
  */
 public class MainPresenter implements IMainPresenter{
     private IMainModel mUserModel;

@@ -8,6 +8,9 @@ import android.view.View;
 
 import com.example.songyang.healthmanager.R;
 
+/**
+ * Created by SongYang on 2016/4/13.
+ */
 public class TreatDetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;

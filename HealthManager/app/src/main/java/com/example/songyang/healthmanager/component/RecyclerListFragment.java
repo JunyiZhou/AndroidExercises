@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by JunyiZhou on 2015/12/31.
- * <p/>
+ * Created by SongYang on 2015/12/31.
+ *
  * 带有RecyclerView的Fragment基类
  */
 public abstract class RecyclerListFragment extends Fragment {

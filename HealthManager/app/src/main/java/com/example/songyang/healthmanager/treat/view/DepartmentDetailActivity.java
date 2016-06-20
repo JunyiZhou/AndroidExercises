@@ -9,6 +9,9 @@ import android.view.View;
 import com.example.songyang.healthmanager.R;
 import com.example.songyang.healthmanager.message.MessageListFragment;
 
+/**
+ * Created by SongYang on 2016/4/13.
+ */
 public class DepartmentDetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;

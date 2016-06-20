@@ -21,7 +21,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 /**
- * Created by JunyiZhou on 2016/4/13.
+ * Created by SongYang on 2016/4/13.
  */
 public class TreatFragment extends RecyclerListFragment implements ITreatView, IOnItemClickListener, IOnItemLongClickListener {
     private ITreatPresenter mTreatPresenter;

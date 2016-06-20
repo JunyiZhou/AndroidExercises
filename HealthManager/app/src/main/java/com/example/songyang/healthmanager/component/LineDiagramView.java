@@ -23,7 +23,7 @@ import java.util.List;
 
 
 /**
- * Created by JunyiZhou on 2016/3/24.
+ * Created by SongYang on 2016/3/24.
  */
 public class LineDiagramView extends View {
 

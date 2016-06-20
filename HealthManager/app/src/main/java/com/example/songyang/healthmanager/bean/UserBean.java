@@ -7,7 +7,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteColumn;
 import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
 
 /**
- * Created by JunyiZhou on 2016/4/12.
+ * Created by SongYang on 2016/4/12.
  */
 @StorIOSQLiteType(table = "user")
 public class UserBean implements Parcelable{

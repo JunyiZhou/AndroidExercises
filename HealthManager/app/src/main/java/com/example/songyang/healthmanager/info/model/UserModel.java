@@ -6,7 +6,7 @@ import com.example.songyang.healthmanager.db.DBManager;
 import java.util.List;
 
 /**
- * Created by JunyiZhou on 2016/4/13.
+ * Created by SongYang on 2016/4/13.
  */
 public class UserModel implements IUserModel {
     private List<UserBean> users;

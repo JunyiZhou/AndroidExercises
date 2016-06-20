@@ -7,7 +7,7 @@ import com.example.songyang.healthmanager.treat.view.ITreatView;
 import java.util.List;
 
 /**
- * Created by JunyiZhou on 2016/4/13.
+ * Created by SongYang on 2016/4/13.
  */
 public class TreatPresenter implements ITreatPresenter {
     private ITreatModel mTreatModel;

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by JunyiZhou on 2016/5/3.
+ * Created by SongYang on 2016/5/3.
  */
 public class DoctorListFragment extends RecyclerListFragment {
 

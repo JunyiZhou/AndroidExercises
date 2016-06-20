@@ -29,6 +29,9 @@ import com.example.songyang.healthmanager.main.presenter.IMainPresenter;
 import com.example.songyang.healthmanager.main.presenter.MainPresenter;
 import com.example.songyang.healthmanager.rostrum.view.RostrumListFragment;
 
+/**
+ * Created by SongYang on 2016/4/13.
+ */
 public class MainActivity extends AppCompatActivity implements IMainView, NavigationView.OnNavigationItemSelectedListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;

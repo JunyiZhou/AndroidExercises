@@ -9,6 +9,9 @@ import android.view.View;
 
 import com.example.songyang.healthmanager.R;
 
+/**
+ * Created by SongYang on 2016/4/13.
+ */
 public class LoginActivity extends AppCompatActivity {
     public static void startInfoActivity(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);

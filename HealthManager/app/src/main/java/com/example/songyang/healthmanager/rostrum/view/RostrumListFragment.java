@@ -26,7 +26,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.List;
 
 /**
- * Created by JunyiZhou on 2016/4/13.
+ * Created by SongYang on 2016/4/13.
  */
 public class RostrumListFragment extends RecyclerListFragment implements IRostrumView, IOnItemClickListener, IOnItemLongClickListener {
     private IRostrumPresenter mRostrumPresenter;

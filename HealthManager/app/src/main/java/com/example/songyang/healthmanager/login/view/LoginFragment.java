@@ -16,6 +16,9 @@ import com.example.songyang.healthmanager.login.presenter.LoginPresenter;
 
 import org.greenrobot.eventbus.EventBus;
 
+/**
+ * Created by SongYang on 2016/4/13.
+ */
 public class LoginFragment extends Fragment  implements ILoginView, View.OnClickListener{
 
     public LoginFragment() {

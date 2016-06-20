@@ -6,7 +6,7 @@ import com.example.songyang.healthmanager.HealthManagerApplication;
 import com.example.songyang.healthmanager.bean.UserBean;
 
 /**
- * Created by JunyiZhou on 2016/4/28.
+ * Created by SongYang on 2016/4/28.
  */
 public class UserInfoKeeper {
     private final static String SP_USERINFO_DATA = "SP_USERINFO_DATA";

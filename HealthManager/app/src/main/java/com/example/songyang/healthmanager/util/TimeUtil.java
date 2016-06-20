@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by JunyiZhou on 2016/4/15.
+ * Created by SongYang on 2016/4/15.
  */
 public class TimeUtil {
     public static final long MINUTE_IN_SECONDS	 = 60;

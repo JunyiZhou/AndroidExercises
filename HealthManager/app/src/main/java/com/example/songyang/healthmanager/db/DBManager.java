@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by JunyiZhou on 2016/4/11.
+ * Created by SongYang on 2016/4/11.
  */
 public class DBManager {
     private static DBManager instance;

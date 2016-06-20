@@ -11,6 +11,9 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+/**
+ * Created by SongYang on 2016/4/13.
+ */
 public class RostrumDetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
